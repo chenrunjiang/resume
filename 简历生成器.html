@@ -1,0 +1,1493 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>简历生成器 - 烤馒头</title>
+<style>
+:root {
+  --bg: #fdf9f4;
+  --card-bg: #ffffff;
+  --primary: #1a6b5a;
+  --primary-light: #e8f2ef;
+  --primary-dark: #125a4a;
+  --accent: #c7773a;
+  --accent-light: #fdf0e6;
+  --text: #2c2420;
+  --text-secondary: #5c544c;
+  --text-muted: #8a8178;
+  --border: #e8ddd0;
+  --edit-outline: #3b82c4;
+  --shadow-sm: 0 1px 3px rgba(44,36,32,0.05);
+  --shadow-card: 0 2px 12px rgba(44,36,32,0.08), 0 8px 32px rgba(44,36,32,0.04);
+  --radius: 12px;
+  --radius-sm: 6px;
+  --radius-lg: 16px;
+  --font: "PingFang SC", "Microsoft YaHei", "Hiragino Sans GB", "Noto Sans SC", system-ui, -apple-system, sans-serif;
+  --transition: 0.2s ease;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html {
+  font-size: 16px;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  font-family: var(--font);
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  min-height: 100vh;
+  min-height: 100dvh;
+  padding-bottom: env(safe-area-inset-bottom, 20px);
+}
+
+/* ========== TOOLBAR ========== */
+.toolbar {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(253,249,244,0.92);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--border);
+  padding: 10px 14px;
+}
+
+.toolbar-inner {
+  max-width: 800px;
+  margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+}
+
+/* Template switch - segmented control */
+.template-switch {
+  display: flex;
+  background: #e8e0d6;
+  border-radius: 10px;
+  padding: 3px;
+  flex: 1 1 auto;
+  min-width: 200px;
+}
+
+.template-btn {
+  flex: 1;
+  padding: 11px 12px;
+  border: none;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  font-family: var(--font);
+  cursor: pointer;
+  background: transparent;
+  color: var(--text-secondary);
+  transition: all var(--transition);
+  white-space: nowrap;
+  min-height: 44px;
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.template-btn.active {
+  background: var(--primary);
+  color: #fff;
+  box-shadow: 0 1px 4px rgba(26,107,90,0.3);
+}
+
+/* Action buttons */
+.action-btns {
+  display: flex;
+  gap: 6px;
+  flex-shrink: 0;
+}
+
+.action-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  min-width: 44px;
+  min-height: 44px;
+  padding: 8px 13px;
+  border: 1.5px solid var(--border);
+  border-radius: 10px;
+  background: var(--card-bg);
+  color: var(--text-secondary);
+  font-size: 0.82rem;
+  font-weight: 600;
+  font-family: var(--font);
+  cursor: pointer;
+  transition: all var(--transition);
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
+  -webkit-user-select: none;
+  white-space: nowrap;
+}
+
+.action-btn:active {
+  transform: scale(0.96);
+}
+
+.action-btn.edit-active {
+  background: var(--edit-outline);
+  color: #fff;
+  border-color: var(--edit-outline);
+}
+
+.action-btn.download-btn {
+  background: var(--primary);
+  color: #fff;
+  border-color: var(--primary);
+}
+
+.action-btn.reset-btn {
+  color: var(--text-muted);
+  font-size: 0.78rem;
+  padding: 8px 10px;
+  min-width: 36px;
+}
+
+/* ========== MAIN CONTENT ========== */
+.main {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 16px 12px 40px;
+}
+
+/* ========== RESUME CARD ========== */
+.resume-wrapper {
+  position: relative;
+}
+
+/* A4 aspect ratio container: width determined, height via aspect-ratio */
+.resume-card {
+  background: var(--card-bg);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-card);
+  overflow: hidden;
+  border: 1px solid var(--border);
+  max-width: 100%;
+}
+
+.resume-card-topbar {
+  height: 6px;
+  background: linear-gradient(90deg, var(--primary) 0%, #1a7a6d 50%, var(--primary) 100%);
+}
+
+.resume-card-body {
+  padding: 28px 26px 24px;
+}
+
+/* ========== RESUME HEADER ========== */
+.resume-header {
+  text-align: center;
+  margin-bottom: 18px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--border);
+}
+
+.resume-name {
+  font-size: 1.5rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  color: var(--text);
+  margin-bottom: 2px;
+  line-height: 1.3;
+}
+
+.resume-direction {
+  font-size: 0.82rem;
+  color: var(--primary);
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.resume-contact {
+  font-size: 0.72rem;
+  color: var(--text-secondary);
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 4px 12px;
+}
+
+.resume-contact .contact-sep {
+  color: var(--border);
+  user-select: none;
+}
+
+.contact-label {
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+/* ========== RESUME SECTIONS ========== */
+.resume-section {
+  margin-bottom: 12px;
+}
+
+.resume-section:last-child { margin-bottom: 0; }
+
+.section-label {
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--text-muted);
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.section-label::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--border);
+}
+
+/* ========== INTENT ROW ========== */
+.intent-row {
+  display: flex;
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+  gap: 6px;
+  flex-wrap: wrap;
+  line-height: 1.7;
+}
+
+.intent-row .intent-label {
+  color: var(--text-muted);
+  font-weight: 500;
+  flex-shrink: 0;
+}
+
+.intent-row .intent-sep {
+  color: var(--border);
+  margin: 0 4px;
+  user-select: none;
+}
+
+/* ========== SELF EVALUATION ========== */
+.eval-list {
+  list-style: none;
+  padding: 0;
+}
+
+.eval-item {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 6px;
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+  line-height: 1.65;
+}
+
+.eval-item:last-child { margin-bottom: 0; }
+
+.eval-bullet {
+  color: var(--primary);
+  font-weight: 700;
+  flex-shrink: 0;
+  user-select: none;
+  -webkit-user-select: none;
+  margin-top: 1px;
+}
+
+.eval-text {
+  flex: 1;
+}
+
+/* ========== TIMELINE / WORK EXPERIENCE ========== */
+.timeline {
+  position: relative;
+  padding-left: 16px;
+  border-left: 2px solid var(--primary-light);
+}
+
+.timeline-item {
+  position: relative;
+  margin-bottom: 10px;
+  padding-left: 12px;
+}
+
+.timeline-item:last-child { margin-bottom: 0; }
+
+.timeline-item::before {
+  content: '';
+  position: absolute;
+  left: -25px;
+  top: 5px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--primary);
+  border: 2px solid #fff;
+  box-shadow: 0 0 0 2px var(--primary-light);
+}
+
+.timeline-org {
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--text);
+  line-height: 1.4;
+  margin-bottom: 1px;
+}
+
+.timeline-dept {
+  font-size: 0.7rem;
+  color: var(--text-secondary);
+}
+
+.timeline-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  align-items: center;
+  margin-bottom: 4px;
+}
+
+.timeline-period {
+  font-size: 0.66rem;
+  color: var(--text-muted);
+}
+
+.timeline-tag {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 10px;
+  font-size: 0.63rem;
+  font-weight: 700;
+  background: var(--accent-light);
+  color: var(--accent);
+  line-height: 1.5;
+}
+
+.timeline-tag.tag-empty {
+  display: none;
+}
+
+.edit-mode .timeline-tag.tag-empty {
+  display: inline-block;
+  background: rgba(59,130,196,0.06);
+  color: transparent;
+  min-width: 60px;
+  padding: 2px 10px;
+}
+
+.edit-mode .timeline-tag.tag-empty:focus {
+  color: var(--text-secondary);
+  min-width: 80px;
+}
+
+.edit-mode .timeline-tag.tag-empty:empty::before {
+  content: '添加标签';
+  color: var(--text-muted);
+  font-weight: 400;
+  font-style: italic;
+}
+
+.edit-mode .timeline-tag.tag-empty:focus:empty::before {
+  content: '';
+}
+
+.timeline-details {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.timeline-detail-item {
+  font-size: 0.72rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  padding-left: 12px;
+  position: relative;
+  margin-bottom: 1px;
+}
+
+.timeline-detail-item::before {
+  content: '\2014';
+  position: absolute;
+  left: 0;
+  color: var(--border);
+}
+
+/* ========== EDUCATION ========== */
+.edu-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+
+.edu-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 4px 10px;
+  padding: 5px 0;
+  border-bottom: 1px dotted var(--border);
+  font-size: 0.75rem;
+  color: var(--text);
+}
+
+.edu-item:last-child { border-bottom: none; }
+
+.edu-school { font-weight: 600; }
+.edu-major { color: var(--text-secondary); font-size: 0.72rem; }
+.edu-period { font-size: 0.68rem; color: var(--text-muted); flex-shrink: 0; }
+.edu-courses { width: 100%; font-size: 0.68rem; color: var(--text-muted); margin-top: 1px; }
+.edu-courses-label { font-weight: 500; color: var(--text-secondary); }
+
+/* ========== SKILL TAGS ========== */
+.skill-block {
+  padding: 0;
+  margin: 0;
+}
+
+.skill-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+
+.skill-tags:last-child {
+  margin-bottom: 0;
+}
+
+.skill-row-label {
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: var(--accent);
+  margin-bottom: 4px;
+  letter-spacing: 0.03em;
+}
+
+.skill-row-label.secondary-label {
+  color: var(--text-muted);
+  margin-top: 8px;
+}
+
+.skill-tag {
+  display: inline-block;
+  padding: 3px 10px;
+  margin: 2px 3px;
+  background: var(--accent-light);
+  color: var(--accent);
+  border-radius: 12px;
+  font-size: 0.68rem;
+  font-weight: 600;
+  border: 1px solid rgba(199,119,58,0.16);
+  line-height: 1.5;
+}
+
+.skill-tag.editable {
+  padding: 3px 10px;
+  margin: 2px 3px;
+}
+
+.skill-tag.secondary {
+  background: #f5f0ea;
+  color: var(--text-secondary);
+  border-color: var(--border);
+}
+
+.skill-tag.secondary.editable {
+  padding: 3px 10px;
+  margin: 2px 3px;
+}
+
+.skill-tag.secondary {
+  background: #f5f0ea;
+  color: var(--text-secondary);
+  border-color: var(--border);
+}
+
+/* ========== CERTIFICATES ========== */
+.cert-list {
+  list-style: none;
+  padding: 0;
+}
+
+.cert-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 6px;
+  font-size: 0.75rem;
+  color: var(--text);
+  line-height: 1.55;
+  margin-bottom: 3px;
+}
+
+.cert-item:last-child { margin-bottom: 0; }
+
+.cert-check {
+  color: var(--primary);
+  font-weight: 700;
+  flex-shrink: 0;
+  user-select: none;
+}
+
+/* ========== EDITABLE ELEMENTS ========== */
+.editable {
+  border-radius: var(--radius-sm);
+  transition: all var(--transition);
+  outline: none;
+  cursor: default;
+  padding: 2px 4px;
+  margin: -2px -4px;
+}
+
+.edit-mode .editable {
+  cursor: text;
+  outline: 1.5px dashed var(--edit-outline);
+  outline-offset: -1px;
+  background: rgba(59,130,196,0.04);
+}
+
+.edit-mode .editable:focus {
+  outline: 2px solid var(--edit-outline);
+  outline-offset: -2px;
+  background: rgba(59,130,196,0.08);
+  box-shadow: 0 0 0 3px rgba(59,130,196,0.1);
+}
+
+/* ========== EDIT INDICATOR ========== */
+.edit-indicator {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--primary);
+  color: #fff;
+  padding: 12px 32px;
+  border-radius: 28px;
+  font-size: 0.82rem;
+  font-weight: 700;
+  z-index: 90;
+  cursor: pointer;
+  border: none;
+  font-family: var(--font);
+  letter-spacing: 0.04em;
+  opacity: 0;
+  transition: opacity 0.25s;
+  box-shadow: 0 4px 20px rgba(26,107,90,0.35);
+  white-space: nowrap;
+  -webkit-tap-highlight-color: transparent;
+  pointer-events: auto;
+}
+
+.edit-mode .edit-indicator {
+  opacity: 1;
+}
+
+.edit-indicator:active {
+  transform: translateX(-50%) scale(0.95);
+}
+
+/* ========== TOAST ========== */
+.toast {
+  position: fixed;
+  top: 80px;
+  left: 50%;
+  transform: translateX(-50%) translateY(-20px);
+  background: var(--primary);
+  color: #fff;
+  padding: 10px 22px;
+  border-radius: 20px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  z-index: 200;
+  opacity: 0;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  pointer-events: none;
+  box-shadow: 0 4px 16px rgba(26,107,90,0.3);
+}
+
+.toast.show {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+/* ========== PRINT STYLES ========== */
+@media print {
+  @page {
+    margin: 0;
+    size: A4;
+  }
+
+  html, body {
+    background: #fff !important;
+    margin: 0;
+    padding: 0;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  .toolbar,
+  .edit-indicator,
+  .toast {
+    display: none !important;
+  }
+
+  .main {
+    max-width: 100% !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+
+  .resume-card {
+    box-shadow: none !important;
+    border: none !important;
+    border-radius: 0 !important;
+    max-width: 100% !important;
+    width: 100% !important;
+  }
+
+  .resume-card-topbar {
+    height: 4px !important;
+    background: #1a6b5a !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  .resume-card-body {
+    padding: 18px 20px 16px !important;
+  }
+
+  .resume-name {
+    font-size: 1.25rem !important;
+    color: #000 !important;
+  }
+
+  .resume-direction {
+    font-size: 0.72rem !important;
+    color: #1a6b5a !important;
+  }
+
+  .resume-contact {
+    font-size: 0.65rem !important;
+    color: #333 !important;
+  }
+
+  .section-label {
+    font-size: 0.62rem !important;
+    color: #555 !important;
+  }
+  .section-label::after { background: #ccc !important; }
+
+  .eval-item { font-size: 0.68rem !important; color: #333 !important; }
+  .eval-bullet { color: #1a6b5a !important; }
+
+  .timeline { border-left-color: #c4dcd4 !important; }
+  .timeline-item::before {
+    background: #1a6b5a !important;
+    border-color: #fff !important;
+    box-shadow: 0 0 0 2px #c4dcd4 !important;
+  }
+  .timeline-org { font-size: 0.72rem !important; color: #000 !important; }
+  .timeline-dept { font-size: 0.63rem !important; }
+  .timeline-period { font-size: 0.6rem !important; }
+  .timeline-tag {
+    font-size: 0.58rem !important;
+  }
+  .timeline-tag.tag-empty {
+    display: none !important;
+  }
+  .timeline-detail-item { font-size: 0.65rem !important; color: #333 !important; }
+
+  .edu-item { font-size: 0.68rem !important; }
+  .edu-period { font-size: 0.62rem !important; }
+  .edu-courses { font-size: 0.62rem !important; }
+
+  .skill-tag {
+    font-size: 0.63rem !important;
+    background: #fdf0e6 !important;
+    color: #c7773a !important;
+    border-color: rgba(199,119,58,0.16) !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  .skill-tag.secondary {
+    background: #f5f0ea !important;
+    color: #555 !important;
+  }
+  .skill-tag.editable {
+    padding: 3px 10px !important;
+    margin: 2px 3px !important;
+  }
+  .skill-tag.secondary.editable {
+    padding: 3px 10px !important;
+    margin: 2px 3px !important;
+  }
+
+  .cert-item { font-size: 0.68rem !important; }
+  .cert-check { color: #1a6b5a !important; }
+
+  .editable {
+    outline: none !important;
+    background: transparent !important;
+    padding: 2px 4px !important;
+    margin: -2px -4px !important;
+  }
+
+  .intent-row { font-size: 0.72rem !important; }
+  .timeline-item { page-break-inside: avoid; }
+}
+
+/* ========== RESPONSIVE ========== */
+@media (max-width: 600px) {
+  .toolbar { padding: 8px 10px; }
+  .toolbar-inner { gap: 6px; }
+
+  .template-switch { min-width: 160px; }
+  .template-btn { font-size: 0.78rem; padding: 10px 8px; }
+
+  .action-btn { font-size: 0.76rem; padding: 8px 10px; min-width: 40px; }
+  .action-btn .btn-label { display: none; }
+  .action-btn.reset-btn { font-size: 0.72rem; }
+
+  .main { padding: 10px 8px 30px; }
+
+  .resume-card-body { padding: 20px 16px 18px; }
+  .resume-name { font-size: 1.35rem; }
+  .resume-direction { font-size: 0.78rem; }
+  .resume-contact { font-size: 0.7rem; gap: 2px 10px; }
+
+  .section-label { font-size: 0.66rem; }
+  .eval-item { font-size: 0.72rem; }
+  .timeline { padding-left: 12px; }
+  .timeline-item { padding-left: 8px; }
+  .timeline-item::before { left: -20px; width: 8px; height: 8px; top: 5px; }
+  .timeline-org { font-size: 0.74rem; }
+  .timeline-detail-item { font-size: 0.68rem; }
+  .edu-item { font-size: 0.72rem; }
+  .skill-tag { font-size: 0.65rem; padding: 3px 10px; }
+  .cert-item { font-size: 0.72rem; }
+
+  .edit-indicator { bottom: 16px; font-size: 0.72rem; padding: 7px 16px; }
+}
+
+@media (max-width: 380px) {
+  .toolbar-inner { gap: 4px; }
+  .template-switch { min-width: 140px; }
+  .template-btn { font-size: 0.74rem; padding: 9px 6px; }
+  .action-btn { padding: 7px 8px; min-width: 38px; font-size: 0.72rem; }
+
+  .resume-card-body { padding: 16px 12px 14px; }
+  .resume-name { font-size: 1.3rem; }
+  .resume-contact { font-size: 0.72rem; }
+  .eval-item { font-size: 0.76rem; }
+}
+</style>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+</head>
+<body>
+
+<!-- ========== TOOLBAR ========== -->
+<div class="toolbar" id="toolbar">
+  <div class="toolbar-inner">
+    <div class="template-switch" id="templateSwitch">
+      <button class="template-btn active" data-template="tech" id="btnTech">检验技术员版</button>
+      <button class="template-btn" data-template="secretary" id="btnSecretary">教学秘书版</button>
+    </div>
+    <div class="action-btns" id="actionBtns">
+      <button class="action-btn" id="btnEdit" title="编辑模式">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 3a2.83 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"/></svg>
+        <span class="btn-label">编辑</span>
+      </button>
+      <button class="action-btn download-btn" id="btnDownload" title="下载PDF（手机可用）">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        <span class="btn-label">下载</span>
+      </button>
+      <button class="action-btn reset-btn" id="btnReset" title="恢复默认">重置</button>
+    </div>
+  </div>
+</div>
+
+<!-- ========== MAIN CONTENT ========== -->
+<div class="main">
+  <div class="resume-wrapper" id="resumeWrapper">
+    <!-- Rendered by JS -->
+  </div>
+</div>
+
+<!-- ========== EDIT INDICATOR ========== -->
+<button class="edit-indicator" id="editIndicator" onclick="toggleEditMode()">完成编辑</button>
+
+<!-- ========== TOAST ========== -->
+<div class="toast" id="toast"></div>
+
+<script>
+(function() {
+  // ============================================================
+  // DATA
+  // ============================================================
+
+  var DEFAULTS = {
+    tech: {
+      header: {
+        name: '烤馒头',
+        direction: '医学检验技术员',
+        phone: '【待填】',
+        email: '【待填】',
+        city: '昆明'
+      },
+      intent: {
+        position: '检验技术员（检验科/第三方医学实验室）',
+        location: '昆明',
+        arrival: '面议'
+      },
+      selfEval: [
+        '医学检验技术本科，持检验士证。省一院检验科1年系统轮转，日均处理标本约【待填】份，独立完成血尿常规、生化等常规项目检测。',
+        '熟练操作血细胞分析仪、全自动生化分析仪、免疫发光分析仪等设备，掌握日常维护。累计静脉采血约【待填】人次。',
+        '参与科室质控数据整理，负责异常值标记与日报编制。协助带教指导实习生【待填】名。求实严谨，适应轮班。'
+      ],
+      experience: [
+        {
+          org: '云南省第一人民医院',
+          dept: '检验科实习生',
+          period: '2024.05-2025.05',
+          tag: '三甲龙头',
+          details: [
+            '轮转【待填】个专业组，日均处理标本【待填】份',
+            '独立静脉采血约【待填】人次，一针成功率【待填】',
+            '熟练操作血球仪、生化仪、发光仪等主流设备',
+            '协助带教指导实习生【待填】名'
+          ]
+        },
+        {
+          org: '昆明市呈贡区人民医院',
+          dept: '检验科实习生',
+          period: '2022.07-2023.03',
+          tag: '',
+          details: [
+            '完成检验科基础轮转，日均处理标本【待填】份'
+          ]
+        },
+        {
+          org: '昆明市中医医院',
+          dept: '急诊科医师助理',
+          period: '2025.05-至今',
+          tag: '三甲',
+          details: [
+            '协助对接检验报告，日均处理约【待填】份'
+          ]
+        }
+      ],
+      education: [
+        {
+          school: '昆明医科大学海源学院',
+          major: '医学检验技术 本科',
+          period: '2023-2025',
+          courses: '临床检验基础、临床生物化学检验、临床免疫学检验、临床微生物学检验、临床血液学检验'
+        },
+        {
+          school: '楚雄医药高等专科学校',
+          major: '医学检验技术 大专',
+          period: '2020-2023',
+          courses: '医用化学、人体解剖学、临床检验基础、生物化学'
+        }
+      ],
+      skills: [
+        { text: '静脉采血', primary: true },
+        { text: '血涂片制备与染色', primary: true },
+        { text: '血尿便常规+生化全套', primary: true },
+        { text: '血球仪/生化仪/发光仪独立操作', primary: true },
+        { text: '室内质控', primary: true },
+        { text: 'Word/Excel/PowerPoint', primary: false }
+      ],
+      certificates: [
+        '临床医学检验技术初级（士）'
+      ]
+    },
+
+    secretary: {
+      header: {
+        name: '烤馒头',
+        direction: '教学秘书/教学管理岗',
+        phone: '【待填】',
+        email: '【待填】',
+        city: '昆明'
+      },
+      intent: {
+        position: '教学秘书/教学管理岗（医院科教科/医学院校教务岗）',
+        location: '昆明',
+        arrival: '面议'
+      },
+      selfEval: [
+        '医学检验本科，1年三甲教学辅助经验。在省一院实习期间协助带教指导实习生【待填】名，独立承担涂片染色操作演示、细胞形态讲解，获带教老师好评。',
+        '现职三甲急诊科医师助理，日常负责检验报告归档、科室文书整理、跨科室沟通协调。熟练Word/Excel制作排班表与数据统计。',
+        '医学专业背景+行政事务经验，能快速理解教研室需求，与各科室教师沟通无障碍。做事有条理，适应多线程办公。'
+      ],
+      experience: [
+        {
+          org: '云南省第一人民医院',
+          dept: '检验科实习生（兼任教学助理）',
+          period: '2024.05-2025.05',
+          tag: '全省教学龙头',
+          details: [
+            '协助带教指导实习生【待填】名，独立讲解涂片染色和细胞形态识别',
+            '批阅实习生实验报告【待填】份，逐份书写批注并反馈',
+            '协助安排轮转排班，协调各专业组教学资源'
+          ]
+        },
+        {
+          org: '昆明市中医医院',
+          dept: '急诊科医师助理',
+          period: '2025.05-至今',
+          tag: '三甲',
+          details: [
+            '负责检验报告归档整理，日均处理约【待填】份',
+            '协助科室文书录入归档（排班表、质控记录等）',
+            '担任检验科-急诊科标本对接联络人'
+          ]
+        },
+        {
+          org: '昆明市呈贡区人民医院',
+          dept: '检验科实习生',
+          period: '2022.07-2023.03',
+          tag: '',
+          details: [
+            '协助整理试剂出入库、标本交接等日常文书'
+          ]
+        }
+      ],
+      education: [
+        {
+          school: '昆明医科大学海源学院',
+          major: '医学检验技术 本科',
+          period: '2023-2025',
+          courses: '临床检验基础、实验室质量管理、医学统计学、临床生物化学检验'
+        },
+        {
+          school: '楚雄医药高等专科学校',
+          major: '医学检验技术 大专',
+          period: '2020-2023',
+          courses: '临床检验基础、医用化学、病理学、微生物学检验'
+        }
+      ],
+      skills: [
+        { text: '实习生培训组织', primary: true },
+        { text: '轮转排班', primary: true },
+        { text: '实验报告批阅', primary: true },
+        { text: '教学台账管理', primary: true },
+        { text: 'Word公文排版', primary: false },
+        { text: 'Excel数据透视表', primary: false },
+        { text: 'PPT课件制作', primary: false }
+      ],
+      certificates: [
+        '临床医学检验技术初级（士）'
+      ]
+    }
+  };
+
+  // ============================================================
+  // STATE
+  // ============================================================
+
+  var currentTemplate = 'tech';
+  var editMode = false;
+  var resumeData = {};
+
+  // ============================================================
+  // STORAGE HELPERS
+  // ============================================================
+
+  function storageKey(tpl) {
+    return 'resume_data_' + tpl;
+  }
+
+  function loadData(tpl) {
+    try {
+      var raw = localStorage.getItem(storageKey(tpl));
+      if (raw) {
+        var saved = JSON.parse(raw);
+        return deepMerge(deepClone(DEFAULTS[tpl]), saved);
+      }
+    } catch (e) {
+      // corrupted data, fall through to defaults
+    }
+    return deepClone(DEFAULTS[tpl]);
+  }
+
+  function saveData(tpl) {
+    try {
+      localStorage.setItem(storageKey(tpl), JSON.stringify(resumeData));
+    } catch (e) {
+      showToast('存储空间不足，请清理浏览器数据');
+    }
+  }
+
+  function resetData(tpl) {
+    try {
+      localStorage.removeItem(storageKey(tpl));
+    } catch (e) { /* ignore */ }
+    resumeData = deepClone(DEFAULTS[tpl]);
+    renderResume();
+    showToast('已恢复默认内容');
+    if (editMode) {
+      applyEditMode();
+    }
+  }
+
+  // ============================================================
+  // UTILITY
+  // ============================================================
+
+  function deepClone(obj) {
+    return JSON.parse(JSON.stringify(obj));
+  }
+
+  function deepMerge(target, source) {
+    var out = deepClone(target);
+    for (var key in source) {
+      if (source.hasOwnProperty(key)) {
+        if (source[key] && typeof source[key] === 'object' && !Array.isArray(source[key])) {
+          out[key] = deepMerge(out[key] || {}, source[key]);
+        } else {
+          out[key] = deepClone(source[key]);
+        }
+      }
+    }
+    return out;
+  }
+
+  function setByPath(obj, path, value) {
+    var parts = path.split('.');
+    var current = obj;
+    for (var i = 0; i < parts.length - 1; i++) {
+      var part = parts[i];
+      if (/^\d+$/.test(part)) {
+        part = parseInt(part, 10);
+      }
+      if (!current[part]) current[part] = {};
+      current = current[part];
+    }
+    var last = parts[parts.length - 1];
+    if (/^\d+$/.test(last)) {
+      last = parseInt(last, 10);
+    }
+    current[last] = value;
+  }
+
+  function getByPath(obj, path) {
+    var parts = path.split('.');
+    var current = obj;
+    for (var i = 0; i < parts.length; i++) {
+      var part = parts[i];
+      if (/^\d+$/.test(part)) {
+        part = parseInt(part, 10);
+      }
+      if (current == null) return undefined;
+      current = current[part];
+    }
+    return current;
+  }
+
+  function showToast(msg) {
+    var toast = document.getElementById('toast');
+    toast.textContent = msg;
+    toast.classList.add('show');
+    clearTimeout(toast._timeout);
+    toast._timeout = setTimeout(function() {
+      toast.classList.remove('show');
+    }, 1800);
+  }
+
+  // ============================================================
+  // RENDER
+  // ============================================================
+
+  function esc(str) {
+    if (str == null) return '';
+    return String(str)
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;')
+      .replace(/'/g, '&#39;');
+  }
+
+  function renderResume() {
+    var d = resumeData;
+    var h = d.header;
+    var intent = d.intent;
+
+    var html = '';
+
+    html += '<div class="resume-card">';
+    html += '<div class="resume-card-topbar"></div>';
+    html += '<div class="resume-card-body">';
+
+    // --- HEADER ---
+    html += '<div class="resume-header">';
+    html += '<div class="resume-name"><span class="editable" data-field="header.name">' + esc(h.name) + '</span></div>';
+    html += '<div class="resume-direction"><span class="editable" data-field="header.direction">求职方向：' + esc(h.direction) + '</span></div>';
+    html += '<div class="resume-contact">';
+    html += '<span><span class="contact-label">电话</span> <span class="editable" data-field="header.phone">' + esc(h.phone) + '</span></span>';
+    html += '<span class="contact-sep">|</span>';
+    html += '<span><span class="contact-label">邮箱</span> <span class="editable" data-field="header.email">' + esc(h.email) + '</span></span>';
+    html += '<span class="contact-sep">|</span>';
+    html += '<span><span class="contact-label">现居</span> <span class="editable" data-field="header.city">' + esc(h.city) + '</span></span>';
+    html += '</div>';
+    html += '</div>';
+
+    // --- INTENT ---
+    html += '<div class="resume-section">';
+    html += '<div class="section-label">求职意向</div>';
+    html += '<div class="intent-row">';
+    html += '<span class="intent-label">目标岗位</span>';
+    html += '<span class="editable" data-field="intent.position">' + esc(intent.position) + '</span>';
+    html += '<span class="intent-sep">|</span>';
+    html += '<span class="intent-label">期望地点</span>';
+    html += '<span class="editable" data-field="intent.location">' + esc(intent.location) + '</span>';
+    html += '<span class="intent-sep">|</span>';
+    html += '<span class="intent-label">到岗时间</span>';
+    html += '<span class="editable" data-field="intent.arrival">' + esc(intent.arrival) + '</span>';
+    html += '</div>';
+    html += '</div>';
+
+    // --- SELF EVALUATION ---
+    html += '<div class="resume-section">';
+    html += '<div class="section-label">自我评价</div>';
+    html += '<div class="eval-list">';
+    for (var ei = 0; ei < d.selfEval.length; ei++) {
+      html += '<div class="eval-item">';
+      html += '<span class="eval-bullet">&#8226;</span>';
+      html += '<span class="eval-text editable" data-field="selfEval.' + ei + '">' + esc(d.selfEval[ei]) + '</span>';
+      html += '</div>';
+    }
+    html += '</div>';
+    html += '</div>';
+
+    // --- WORK EXPERIENCE ---
+    html += '<div class="resume-section">';
+    html += '<div class="section-label">工作经历</div>';
+    html += '<div class="timeline">';
+    for (var xi = 0; xi < d.experience.length; xi++) {
+      var exp = d.experience[xi];
+      html += '<div class="timeline-item">';
+      html += '<div class="timeline-org"><span class="editable" data-field="experience.' + xi + '.org">' + esc(exp.org) + '</span></div>';
+      html += '<div class="timeline-meta">';
+      html += '<span class="timeline-dept editable" data-field="experience.' + xi + '.dept">' + esc(exp.dept) + '</span>';
+      html += '<span class="timeline-period editable" data-field="experience.' + xi + '.period">' + esc(exp.period) + '</span>';
+      var tagClass = exp.tag ? 'timeline-tag' : 'timeline-tag tag-empty';
+      html += '<span class="' + tagClass + ' editable" data-field="experience.' + xi + '.tag">' + esc(exp.tag || '') + '</span>';
+      html += '</div>';
+      html += '<ul class="timeline-details">';
+      for (var di = 0; di < exp.details.length; di++) {
+        html += '<li class="timeline-detail-item"><span class="editable" data-field="experience.' + xi + '.details.' + di + '">' + esc(exp.details[di]) + '</span></li>';
+      }
+      html += '</ul>';
+      html += '</div>';
+    }
+    html += '</div>';
+    html += '</div>';
+
+    // --- EDUCATION ---
+    html += '<div class="resume-section">';
+    html += '<div class="section-label">教育经历</div>';
+    html += '<div class="edu-list">';
+    for (var edi = 0; edi < d.education.length; edi++) {
+      var edu = d.education[edi];
+      html += '<div class="edu-item">';
+      html += '<div style="display:flex;align-items:baseline;gap:6px;flex-wrap:wrap;">';
+      html += '<span class="edu-school editable" data-field="education.' + edi + '.school">' + esc(edu.school) + '</span>';
+      html += '<span class="edu-major editable" data-field="education.' + edi + '.major">' + esc(edu.major) + '</span>';
+      html += '</div>';
+      html += '<span class="edu-period editable" data-field="education.' + edi + '.period">' + esc(edu.period) + '</span>';
+      html += '<div class="edu-courses"><span class="edu-courses-label">相关课程：</span><span class="editable" data-field="education.' + edi + '.courses">' + esc(edu.courses) + '</span></div>';
+      html += '</div>';
+    }
+    html += '</div>';
+    html += '</div>';
+
+    // --- SKILLS ---
+    html += '<div class="resume-section">';
+    html += '<div class="section-label">技能</div>';
+    html += '<div class="skill-block">';
+    // Primary skills row
+    var hasPrimary = d.skills.some(function(sk) { return sk.primary; });
+    var hasSecondary = d.skills.some(function(sk) { return !sk.primary; });
+    if (hasPrimary) {
+      html += '<div class="skill-row-label">核心技能</div>';
+      html += '<div class="skill-tags">';
+      for (var si = 0; si < d.skills.length; si++) {
+        var sk = d.skills[si];
+        if (sk.primary) {
+          html += '<span class="skill-tag editable" data-field="skills.' + si + '.text">' + esc(sk.text) + '</span>';
+        }
+      }
+      html += '</div>';
+    }
+    if (hasSecondary) {
+      html += '<div class="skill-row-label secondary-label">其他技能</div>';
+      html += '<div class="skill-tags">';
+      for (var si = 0; si < d.skills.length; si++) {
+        var sk = d.skills[si];
+        if (!sk.primary) {
+          html += '<span class="skill-tag secondary editable" data-field="skills.' + si + '.text">' + esc(sk.text) + '</span>';
+        }
+      }
+      html += '</div>';
+    }
+    html += '</div>';
+    html += '</div>';
+
+    // --- CERTIFICATES ---
+    html += '<div class="resume-section">';
+    html += '<div class="section-label">证书</div>';
+    html += '<ul class="cert-list">';
+    for (var ci = 0; ci < d.certificates.length; ci++) {
+      html += '<li class="cert-item"><span class="cert-check">&#10003;</span><span class="editable" data-field="certificates.' + ci + '">' + esc(d.certificates[ci]) + '</span></li>';
+    }
+    html += '</ul>';
+    html += '</div>';
+
+    html += '</div>'; // resume-card-body
+    html += '</div>'; // resume-card
+
+    document.getElementById('resumeWrapper').innerHTML = html;
+
+    // Attach blur handlers to all editable elements
+    attachEditableListeners();
+  }
+
+  // ============================================================
+  // EDITABLE HANDLERS
+  // ============================================================
+
+  function attachEditableListeners() {
+    var editables = document.querySelectorAll('.editable');
+    for (var i = 0; i < editables.length; i++) {
+      var el = editables[i];
+      // Remove old listener (avoid duplicates on re-render)
+      el.removeEventListener('blur', onEditableBlur);
+      el.addEventListener('blur', onEditableBlur);
+    }
+  }
+
+  function onEditableBlur(e) {
+    var el = e.target;
+    var field = el.getAttribute('data-field');
+    if (!field) return;
+
+    var newValue = el.textContent.trim();
+
+    // Allow empty for tag fields (user may want to remove a tag)
+    var isTagField = field.indexOf('.tag') === field.length - 4;
+
+    // If content is empty and not a tag field, restore original value
+    if (!newValue && !isTagField) {
+      var original = getByPath(DEFAULTS[currentTemplate], field);
+      if (original !== undefined) {
+        el.textContent = original;
+        newValue = original;
+      }
+    }
+
+    // Handle empty tag: ensure proper class state
+    if (isTagField) {
+      if (!newValue) {
+        el.classList.add('tag-empty');
+      } else {
+        el.classList.remove('tag-empty');
+      }
+    }
+
+    // Update data model
+    setByPath(resumeData, field, newValue);
+
+    // Save to localStorage
+    saveData(currentTemplate);
+  }
+
+  // ============================================================
+  // EDIT MODE
+  // ============================================================
+
+  function applyEditMode() {
+    var wrapper = document.getElementById('resumeWrapper');
+    var editables = document.querySelectorAll('.editable');
+    var btnLabel = document.querySelector('#btnEdit .btn-label');
+    var indicator = document.getElementById('editIndicator');
+    var tSwitch = document.getElementById('templateSwitch');
+    var actBtns = document.getElementById('actionBtns');
+
+    if (editMode) {
+      wrapper.classList.add('edit-mode');
+      document.getElementById('btnEdit').classList.add('edit-active');
+      if (btnLabel) btnLabel.textContent = '完成';
+      if (indicator) indicator.style.display = 'block';
+      if (tSwitch) tSwitch.style.display = 'none';
+      if (actBtns) {
+        // hide all action buttons except edit
+        var children = actBtns.children;
+        for (var i = 0; i < children.length; i++) {
+          if (children[i].id !== 'btnEdit') {
+            children[i].style.display = 'none';
+          }
+        }
+      }
+      for (var i = 0; i < editables.length; i++) {
+        editables[i].setAttribute('contenteditable', 'true');
+      }
+    } else {
+      wrapper.classList.remove('edit-mode');
+      document.getElementById('btnEdit').classList.remove('edit-active');
+      if (btnLabel) btnLabel.textContent = '编辑';
+      if (indicator) indicator.style.display = 'none';
+      if (tSwitch) tSwitch.style.display = '';
+      if (actBtns) {
+        var children = actBtns.children;
+        for (var i = 0; i < children.length; i++) {
+          children[i].style.display = '';
+        }
+      }
+      for (var i = 0; i < editables.length; i++) {
+        editables[i].setAttribute('contenteditable', 'false');
+      }
+    }
+  }
+
+  function toggleEditMode() {
+    editMode = !editMode;
+    applyEditMode();
+    if (editMode) {
+      showToast('点击任意文字即可编辑');
+    }
+  }
+
+  // ============================================================
+  // TEMPLATE SWITCHING
+  // ============================================================
+
+  function switchTemplate(tpl) {
+    if (tpl === currentTemplate && resumeData) return;
+
+    // Save current data before switching
+    if (resumeData) {
+      saveData(currentTemplate);
+    }
+
+    // If edit mode is on, turn it off for the switch
+    var wasEditMode = editMode;
+    if (editMode) {
+      editMode = false;
+      applyEditMode();
+    }
+
+    currentTemplate = tpl;
+    resumeData = loadData(tpl);
+    renderResume();
+
+    // Update template buttons
+    document.getElementById('btnTech').classList.toggle('active', tpl === 'tech');
+    document.getElementById('btnSecretary').classList.toggle('active', tpl === 'secretary');
+
+    // Restore edit mode if it was on
+    if (wasEditMode) {
+      editMode = true;
+      applyEditMode();
+    }
+  }
+
+  // ============================================================
+  // DOWNLOAD PDF
+  // ============================================================
+
+  function downloadPDF() {
+    var wasEditMode = editMode;
+    if (editMode) {
+      editMode = false;
+      applyEditMode();
+    }
+
+    var card = document.querySelector('.resume-card');
+    var btn = document.getElementById('btnDownload');
+    var label = btn.querySelector('.btn-label');
+    var origText = label.textContent;
+    label.textContent = '...';
+    btn.disabled = true;
+
+    var filename = (currentTemplate === 'tech' ? '简历-检验技术员' : '简历-教学秘书') + '.pdf';
+    var opt = {
+      margin:       [6, 8, 6, 8],
+      filename:     filename,
+      image:        { type: 'jpeg', quality: 0.98 },
+      html2canvas:  { scale: 3, useCORS: true, letterRendering: true },
+      jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' }
+    };
+
+    html2pdf().set(opt).from(card).save().then(function() {
+      label.textContent = origText;
+      btn.disabled = false;
+      if (wasEditMode) { editMode = true; applyEditMode(); }
+    }).catch(function() {
+      label.textContent = origText;
+      btn.disabled = false;
+      if (wasEditMode) { editMode = true; applyEditMode(); }
+      alert('PDF生成失败，请重试');
+    });
+  }
+
+  // ============================================================
+  // EVENT HANDLERS
+  // ============================================================
+
+  document.getElementById('btnTech').addEventListener('click', function() {
+    switchTemplate('tech');
+  });
+
+  document.getElementById('btnSecretary').addEventListener('click', function() {
+    switchTemplate('secretary');
+  });
+
+  document.getElementById('btnEdit').addEventListener('click', toggleEditMode);
+
+  document.getElementById('btnDownload').addEventListener('click', downloadPDF);
+
+  document.getElementById('btnReset').addEventListener('click', function() {
+    if (confirm('确定要恢复为默认内容吗？您编辑的内容将丢失。')) {
+      resetData(currentTemplate);
+    }
+  });
+
+  // ============================================================
+  // INIT
+  // ============================================================
+
+  // Prefer tech as default, check URL hash for secretary
+  var hash = window.location.hash.replace('#', '');
+  if (hash === 'secretary' || hash === 'jiaoxue') {
+    currentTemplate = 'secretary';
+  }
+
+  resumeData = loadData(currentTemplate);
+  renderResume();
+
+  // Set initial active button
+  document.getElementById('btnTech').classList.toggle('active', currentTemplate === 'tech');
+  document.getElementById('btnSecretary').classList.toggle('active', currentTemplate === 'secretary');
+
+  // Initialize edit mode off
+  applyEditMode();
+
+})();
+</script>
+
+</body>
+</html>
