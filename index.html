@@ -5,315 +5,137 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>烤馒头求职工具箱</title>
 <style>
-/* ===== Reset ===== */
 * { box-sizing: border-box; margin: 0; padding: 0; }
 
-/* ===== Base ===== */
 body {
-  font-family: "PingFang SC", "Microsoft YaHei", "Hiragino Sans GB", system-ui, -apple-system, sans-serif;
-  background:
-    radial-gradient(ellipse 80% 60% at 20% 15%, rgba(26,107,90,0.025) 0%, transparent 60%),
-    radial-gradient(ellipse 70% 50% at 80% 85%, rgba(184,133,90,0.02) 0%, transparent 60%),
-    #fdf9f4;
+  font-family: "PingFang SC", "Microsoft YaHei", "Hiragino Sans GB", system-ui, sans-serif;
+  background: #fdf9f4;
   color: #2c2420;
   min-height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 28px 20px;
+  padding: 24px 16px;
 }
 
-/* ===== Card ===== */
 .card {
   background: #fffcf8;
-  border-radius: 22px;
-  padding: 48px 36px 36px;
-  max-width: 420px;
+  border-radius: 20px;
+  padding: 40px 28px 32px;
+  max-width: 400px;
   width: 100%;
-  box-shadow:
-    0 1px 3px rgba(44,36,32,0.03),
-    0 4px 16px rgba(44,36,32,0.05),
-    0 16px 48px rgba(44,36,32,0.05);
+  box-shadow: 0 2px 12px rgba(44,36,32,0.06), 0 8px 32px rgba(44,36,32,0.04);
   text-align: center;
-  position: relative;
-  overflow: hidden;
-  animation: cardEnter 0.7s cubic-bezier(0.22, 0.61, 0.36, 1) both;
 }
 
-/* Subtle top gradient accent bar */
+/* 顶部短装饰线 */
 .card::before {
   content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 4px;
-  background: linear-gradient(90deg,
-    #c17d5a 0%,
-    #d4a98a 20%,
-    #1a6b5a 48%,
-    #3d8b7d 76%,
-    #1a6b5a 100%);
-  animation: accentShimmer 8s ease-in-out infinite;
+  display: block;
+  width: 36px;
+  height: 3px;
+  border-radius: 2px;
+  background: #1a6b5a;
+  margin: 0 auto 24px;
 }
 
-@keyframes accentShimmer {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.75; }
-}
-
-@keyframes cardEnter {
-  from {
-    opacity: 0;
-    transform: translateY(28px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-/* ===== Typography ===== */
 h1 {
-  font-size: 1.75rem;
+  font-size: 1.4rem;
   font-weight: 800;
   color: #1a6b5a;
-  margin-bottom: 4px;
-  letter-spacing: 0.03em;
+  margin-bottom: 28px;
 }
 
-.subtitle {
-  font-size: 0.875rem;
-  color: #a89888;
-  margin-bottom: 38px;
-  letter-spacing: 0.04em;
-}
-
-/* ===== Button Container ===== */
 .buttons {
   display: flex;
   flex-direction: column;
-  gap: 11px;
+  gap: 10px;
 }
 
-/* ===== Buttons ===== */
+/* ===== 按钮基础 ===== */
 .btn {
   display: flex;
   align-items: center;
-  gap: 16px;
-  padding: 18px 20px;
-  border-radius: 14px;
-  border: 1.5px solid #ece3d6;
+  gap: 12px;
+  padding: 15px 16px;
+  border-radius: 12px;
+  border: 1.5px solid;
   background: #fffcf8;
-  cursor: pointer;
   text-decoration: none;
   color: #2c2420;
+  text-align: left;
   position: relative;
   overflow: hidden;
-  transition:
-    transform 0.35s cubic-bezier(0.22, 0.61, 0.36, 1),
-    box-shadow 0.35s cubic-bezier(0.22, 0.61, 0.36, 1),
-    border-color 0.35s cubic-bezier(0.22, 0.61, 0.36, 1),
-    background 0.35s ease;
   -webkit-tap-highlight-color: transparent;
-  user-select: none;
 }
 
-/* Left accent stripe — hidden by default, revealed on hover */
-.btn::before {
-  content: '';
+/* ===== 三个按钮各自颜色 ===== */
+.btn-guide {
+  border-color: rgba(193,125,90,0.35);
+}
+
+.btn-form {
+  border-color: rgba(74,139,122,0.35);
+}
+
+.btn-resume {
+  border-color: rgba(26,107,90,0.35);
+}
+
+/* 按压态 */
+.btn-guide:active  { background: rgba(193,125,90,0.08); }
+.btn-form:active   { background: rgba(74,139,122,0.08); }
+.btn-resume:active { background: rgba(26,107,90,0.08); }
+
+/* ===== 左侧竖条 ===== */
+.btn-stripe {
   position: absolute;
-  left: 0;
-  top: 14px;
-  bottom: 14px;
+  left: 0; top: 0; bottom: 0;
   width: 3px;
-  border-radius: 0 3px 3px 0;
-  transform: scaleY(0.4);
-  opacity: 0;
-  transition:
-    transform 0.35s cubic-bezier(0.22, 0.61, 0.36, 1),
-    opacity 0.35s ease;
-}
-
-/* Three distinct accent colors — one per button */
-.buttons .btn:nth-child(1)::before { background: #c17d5a; }
-.buttons .btn:nth-child(2)::before { background: #4a8b7a; }
-.buttons .btn:nth-child(3)::before { background: #1a6b5a; }
-
-.btn:hover::before,
-.btn:active::before {
-  opacity: 1;
-  transform: scaleY(1);
-}
-
-/* Staggered entrance animations */
-.buttons .btn:nth-child(1) {
-  animation: btnEnter 0.5s 0.12s cubic-bezier(0.22, 0.61, 0.36, 1) both;
-}
-.buttons .btn:nth-child(2) {
-  animation: btnEnter 0.5s 0.22s cubic-bezier(0.22, 0.61, 0.36, 1) both;
-}
-.buttons .btn:nth-child(3) {
-  animation: btnEnter 0.5s 0.32s cubic-bezier(0.22, 0.61, 0.36, 1) both;
-}
-
-@keyframes btnEnter {
-  from {
-    opacity: 0;
-    transform: translateY(14px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-/* Hover state — gentle glow + rightward nudge */
-.btn:hover {
-  border-color: #c5d5ce;
-  background: #f7fbf8;
-  box-shadow:
-    0 2px 8px rgba(26,107,90,0.07),
-    0 6px 20px rgba(26,107,90,0.05);
-  transform: translateX(5px);
-}
-
-/* Active/press state — subtle bounce-back */
-.btn:active {
-  transform: translateX(5px) scale(0.97);
-  transition: transform 0.08s ease;
-  box-shadow:
-    0 1px 4px rgba(26,107,90,0.06),
-    0 3px 10px rgba(26,107,90,0.04);
-}
-
-/* ===== Button Children ===== */
-.btn-icon {
-  font-size: 1.7rem;
   flex-shrink: 0;
-  line-height: 1;
-  transition: transform 0.35s cubic-bezier(0.22, 0.61, 0.36, 1);
 }
 
-.btn:hover .btn-icon {
-  transform: scale(1.12);
-}
+.stripe-guide  { background: #c17d5a; }
+.stripe-form   { background: #4a8b7a; }
+.stripe-resume { background: #1a6b5a; }
 
-.btn-body {
-  text-align: left;
-  flex: 1;
-  min-width: 0;
-}
+/* ===== 内容区 ===== */
+.btn-body { flex: 1; min-width: 0; }
 
 .btn-title {
-  font-size: 1rem;
+  font-size: 0.95rem;
   font-weight: 700;
   line-height: 1.4;
-  color: #2c2420;
-  transition: color 0.35s ease;
-}
-
-.btn:hover .btn-title {
-  color: #1a6b5a;
 }
 
 .btn-desc {
-  font-size: 0.75rem;
+  font-size: 0.72rem;
   color: #9e9286;
   line-height: 1.4;
-  margin-top: 2px;
-  transition: color 0.35s ease;
-}
-
-.btn:hover .btn-desc {
-  color: #7a8f85;
+  margin-top: 1px;
 }
 
 .btn-arrow {
   color: #c4b8a8;
-  font-size: 1.35rem;
-  font-weight: 300;
+  font-size: 1.1rem;
   flex-shrink: 0;
-  transition:
-    color 0.35s ease,
-    transform 0.35s cubic-bezier(0.22, 0.61, 0.36, 1);
-}
-
-.btn:hover .btn-arrow {
-  color: #1a6b5a;
-  transform: translateX(4px);
 }
 
 /* ===== Footer ===== */
 .footer {
-  margin-top: 30px;
-  font-size: 0.7rem;
+  margin-top: 24px;
+  padding-top: 16px;
+  font-size: 0.68rem;
   color: #bfb2a2;
-  position: relative;
-  padding-top: 18px;
-  letter-spacing: 0.03em;
+  border-top: 1px solid #f0e8dc;
 }
 
-/* Subtle divider line above footer */
-.footer::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 52px;
-  height: 1px;
-  background: linear-gradient(90deg, transparent, #dbd0c2, transparent);
-  border-radius: 1px;
-}
-
-/* ===== Responsive ===== */
-@media (max-width: 440px) {
-  body {
-    padding: 16px 12px;
-  }
-
-  .card {
-    padding: 38px 24px 28px;
-    border-radius: 18px;
-  }
-
-  h1 {
-    font-size: 1.45rem;
-  }
-
-  .subtitle {
-    margin-bottom: 30px;
-    font-size: 0.8125rem;
-  }
-
-  .btn {
-    padding: 16px 16px;
-    gap: 13px;
-    border-radius: 12px;
-  }
-
-  .btn-icon {
-    font-size: 1.5rem;
-  }
-
-  .btn-title {
-    font-size: 0.95rem;
-  }
-
-  .btn-desc {
-    font-size: 0.7rem;
-  }
-
-  .btn-arrow {
-    font-size: 1.2rem;
-  }
-
-  .footer {
-    margin-top: 24px;
-    font-size: 0.65rem;
-    padding-top: 14px;
-  }
+@media (max-width: 380px) {
+  .card { padding: 32px 20px 24px; border-radius: 16px; }
+  h1 { font-size: 1.25rem; margin-bottom: 22px; }
+  .btn { padding: 14px 12px; gap: 8px; }
+  .btn-title { font-size: 0.88rem; }
+  .btn-desc { font-size: 0.68rem; }
 }
 </style>
 </head>
@@ -321,11 +143,10 @@ h1 {
 
 <div class="card">
   <h1>烤馒头求职工具箱</h1>
-  <p class="subtitle">选一个开始</p>
 
   <div class="buttons">
-    <a href="指南.html" class="btn">
-      <span class="btn-icon">&#x1F4CB;</span>
+    <a href="指南.html" class="btn btn-guide">
+      <span class="btn-stripe stripe-guide"></span>
       <span class="btn-body">
         <span class="btn-title">求职指南</span>
         <span class="btn-desc">岗位选择、简历建议、常见问题</span>
@@ -333,20 +154,20 @@ h1 {
       <span class="btn-arrow">&#x203A;</span>
     </a>
 
-    <a href="信息收集.html" class="btn">
-      <span class="btn-icon">&#x270F;&#xFE0F;</span>
+    <a href="信息收集.html" class="btn btn-form">
+      <span class="btn-stripe stripe-form"></span>
       <span class="btn-body">
         <span class="btn-title">信息收集</span>
-        <span class="btn-desc">填一些选择题，帮我更了解你的情况</span>
+        <span class="btn-desc">选择题形式，帮我更了解你的情况</span>
       </span>
       <span class="btn-arrow">&#x203A;</span>
     </a>
 
-    <a href="简历生成器.html" class="btn">
-      <span class="btn-icon">&#x1F4C4;</span>
+    <a href="简历生成器.html" class="btn btn-resume">
+      <span class="btn-stripe stripe-resume"></span>
       <span class="btn-body">
         <span class="btn-title">简历生成器</span>
-        <span class="btn-desc">编辑简历内容，下载PDF</span>
+        <span class="btn-desc">编辑简历，下载PDF文件</span>
       </span>
       <span class="btn-arrow">&#x203A;</span>
     </a>
