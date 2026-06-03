@@ -1015,30 +1015,14 @@ body {
   }
 
   function loadData(tpl) {
-    try {
-      var raw = localStorage.getItem(storageKey(tpl));
-      if (raw) {
-        var saved = JSON.parse(raw);
-        return deepMerge(deepClone(DEFAULTS[tpl]), saved);
-      }
-    } catch (e) {
-      // corrupted data, fall through to defaults
-    }
     return deepClone(DEFAULTS[tpl]);
   }
 
   function saveData(tpl) {
-    try {
-      localStorage.setItem(storageKey(tpl), JSON.stringify(resumeData));
-    } catch (e) {
-      showToast('存储空间不足，请清理浏览器数据');
-    }
+    // 不保存，刷新即重置
   }
 
   function resetData(tpl) {
-    try {
-      localStorage.removeItem(storageKey(tpl));
-    } catch (e) { /* ignore */ }
     resumeData = deepClone(DEFAULTS[tpl]);
     renderResume();
     showToast('已恢复默认内容');
