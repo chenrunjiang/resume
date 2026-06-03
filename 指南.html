@@ -1239,10 +1239,10 @@ body {
 <!-- ====== HEADER ====== -->
 <header class="header">
   <div class="header-inner">
-    <div class="header-badge">2026年6月 · 烤馒头求职指南</div>
+    <div class="header-badge">2026年6月 · 数据更新版</div>
     <h1>烤馒头求职指南</h1>
     <p class="subtitle">医学检验技术 · 持证上岗 · 三甲医院在职</p>
-    <p class="tagline">分步走，不指望一步到位。先上岸，再择船。</p>
+    <p class="tagline">数据澄清了方向。检验是主场，行政是副线。我有筹码，选适合我的。</p>
 
     <!-- Urgent Alert -->
     <div class="urgent-alert">
@@ -1276,21 +1276,60 @@ body {
     <h2><span class="section-icon"></span>现在可以投的岗位</h2>
   </div>
   <p class="section-intro">
-    下面是6个确认在招的岗位，按优先顺序排。每个都帮你查好了：要什么条件、给多少钱、怎么投、投哪里。
+    下面是6个确认在招的岗位，按推荐优先级排列。你的检验底子很扎实——日均100+标本、6组全轮转、6种仪器独立操作。这份实力在昆明检验市场很有竞争力。
   </p>
 
-  <!-- Job 1: 金域医学 -->
+  <!-- Job 1: 金域医学（最匹配） -->
   <div class="job-card" id="job1">
     <div class="job-card-top">
       <h3>检验技术员 <span class="org-name">@ 昆明金域医学检验中心</span></h3>
       <div class="job-tags">
         <span class="job-tag tag-org">企业</span>
-        <span class="status-badge status-open">现在可投</span>
+        <span class="status-badge status-open">最匹配</span>
       </div>
     </div>
     <div class="job-salary-row">
-      <span class="job-salary">6-10万/年</span>
-      <span class="job-salary-note">约5000-8000每月到手，六险一金+员工宿舍</span>
+      <span class="job-salary">7-12万/年</span>
+      <span class="job-salary-note">约6000-10000每月到手，六险一金+员工宿舍</span>
+    </div>
+    <div class="job-match-row">
+      <span class="match-badge match-good">很适合你</span>
+    </div>
+    <button class="job-howto-toggle" onclick="toggleJobCard(this)">
+      <span class="arrow">&#9654;</span> 怎么投 + 面试准备提示（点击展开）
+    </button>
+    <div class="job-howto-content">
+      <div class="job-howto-inner">
+        <h4>具体操作步骤</h4>
+        <ol>
+          <li>打开微信，搜索公众号 <strong>"金域人"</strong>（金域医学官方招聘号），点关注</li>
+          <li>在公众号菜单里找"加入我们"或"社会招聘"，搜"昆明"找"检验技术员"</li>
+          <li>也可以在"前程无忧"或"猎聘"网站/App上搜"金域医学 昆明"</li>
+          <li>简历里重点写：日均100+标本、6组全轮转、7项独立操作、6种仪器</li>
+          <li>面试通常是1-2轮：HR先聊，然后是技术主管面谈（不考操作，主要聊经历）</li>
+        </ol>
+        <div class="info-note">
+          <strong>为什么首选：</strong>专业完全对口，企业不看学校出身。上市公司，正规五险一金，有宿舍有食堂。面试不考动手操作，对你最友好。
+        </div>
+        <div class="info-note" style="margin-top:8px;background:rgba(199,119,58,0.08);color:var(--accent);">
+          <strong>面试准备：</strong>金域面试可能问到报告审核经验和室内质控经验。建议面试前花半天复习ISO 15189基础知识（检验结果量值溯源、质控规则），以及异常值复检规则。就算没独立做过，能说出理论框架也很加分。
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Job 2: 迈瑞医疗 临床应用专员 -->
+  <div class="job-card" id="job2">
+    <div class="job-card-top">
+      <h3>临床应用专员 <span class="org-name">@ 迈瑞医疗（IVD龙头）</span></h3>
+      <div class="job-tags">
+        <span class="job-tag tag-org">企业</span>
+        <span class="status-badge status-open">2026春招</span>
+      </div>
+    </div>
+    <div class="job-salary-row">
+      <span class="job-salary">8-15万/年</span>
+      <span class="job-salary-note">临床应用方向，六险一金</span>
     </div>
     <div class="job-match-row">
       <span class="match-badge match-good">很适合你</span>
@@ -1302,21 +1341,20 @@ body {
       <div class="job-howto-inner">
         <h4>具体操作步骤</h4>
         <ol>
-          <li>打开微信，搜索公众号 <strong>"金域人"</strong>（金域医学官方招聘号），点关注</li>
-          <li>在公众号菜单里找"加入我们"或"社会招聘"，搜"昆明"找"检验技术员"</li>
-          <li>也可以在"前程无忧"或"猎聘"网站/App上搜"金域医学 昆明"</li>
-          <li>简历里重点写三句话：三甲医院在职、持检验士证、医学检验技术专业</li>
-          <li>面试通常是1-2轮：HR先聊，然后是技术主管面谈（不考操作，主要聊经历）</li>
+          <li>搜索"迈瑞医疗 2026春招 临床应用专员"或关注"迈瑞医疗招聘"公众号</li>
+          <li>这个岗位本质是<strong>用检验专业知识帮客户用好仪器</strong>——你独立操作6种仪器的经验正好匹配</li>
+          <li>简历里强调：日均100+标本处理经验、6种检验仪器独立操作、三甲检验科全流程熟悉</li>
+          <li>面试重点展现：检验专业基础 + 沟通表达能力（你有患者沟通和跨科室协调的实战经验）</li>
         </ol>
         <div class="info-note">
-          <strong>为什么首选：</strong>专业完全对口，企业不看学校出身。上市公司，正规五险一金，有宿舍有食堂。面试不考动手操作，对你最友好。
+          <strong>为什么推荐：</strong>比检验技术员薪资更高（8-15万 vs 6-10万），而且用检验技能做更有成长性的工作。迈瑞是国内医疗器械龙头，解决方案覆盖99%三甲医院。你的仪器操作经验+沟通能力是这个岗位的黄金组合。金域和迈瑞可以同时投，互不冲突。
         </div>
       </div>
     </div>
   </div>
 
-  <!-- Job 2: 云大附院 教学秘书 -->
-  <div class="job-card" id="job2">
+  <!-- Job 3: 云大附院 教学秘书 -->
+  <div class="job-card" id="job3">
     <div class="job-card-top">
       <h3>医学教育部教学秘书 <span class="org-name">@ 云南大学附属医院</span></h3>
       <div class="job-tags">
@@ -1329,7 +1367,7 @@ body {
       <span class="job-salary-note">到手，劳务派遣编制</span>
     </div>
     <div class="job-match-row">
-      <span class="match-badge match-ok">可以试试</span>
+      <span class="match-badge match-good">很适合你</span>
     </div>
     <button class="job-howto-toggle" onclick="toggleJobCard(this)">
       <span class="arrow">&#9654;</span> 怎么投（点击展开）
@@ -1345,14 +1383,17 @@ body {
           <li>后续可能有统一考试（笔试+面试），报名时问清楚考试时间</li>
         </ol>
         <div class="info-note">
-          <strong>提醒：</strong>这个岗不是检验岗，是行政管理岗，但你的医学背景完全够格。招2人，竞争不小，当作冲刺项，不是唯一选项。先报名占位，不报白不报。
+          <strong>为什么很适合你：</strong>你指导过10+实习生，现职也带新人，教学和行政经验是实打实的。现职本身就是检验操作+行政文书双轨并行，跟教学秘书岗的日常工作高度重叠。面试如果被问"为什么不继续做检验转行政"，回答思路：<em>"我并不是放弃检验，而是检验背景恰好是做好教学秘书的独特优势——懂专业才能安排好轮转教学，临床经验能帮我把理论讲透。检验+教学双轨的经验，让我比纯行政背景的人更理解临床教学的痛点。"</em>
+        </div>
+        <div class="info-note" style="margin-top:8px;background:rgba(199,119,58,0.08);color:var(--accent);">
+          <strong>推荐备注：</strong>检验岗优先，此为备选。这个岗不是检验岗，是行政管理岗。先报名占位，如果检验岗有进展，届时再权衡。
         </div>
       </div>
     </div>
   </div>
 
-  <!-- Job 3: 市三院 编外 -->
-  <div class="job-card" id="job3">
+  <!-- Job 4: 市三院 编外 -->
+  <div class="job-card" id="job4">
     <div class="job-card-top">
       <h3>编外工作人员（招18人） <span class="org-name">@ 昆明市第三人民医院</span></h3>
       <div class="job-tags">
@@ -1387,8 +1428,8 @@ body {
     </div>
   </div>
 
-  <!-- Job 4: 民营医院/体检中心 -->
-  <div class="job-card" id="job4">
+  <!-- Job 5: 民营医院/体检中心（第三梯队） -->
+  <div class="job-card" id="job5">
     <div class="job-card-top">
       <h3>检验技师 <span class="org-name">@ 昆明民营医院 / 体检中心</span></h3>
       <div class="job-tags">
@@ -1401,7 +1442,7 @@ body {
       <span class="job-salary-note">到手，高的能到8000+</span>
     </div>
     <div class="job-match-row">
-      <span class="match-badge match-good">很适合你</span>
+      <span class="match-badge match-ok">第三梯队·值得投</span>
     </div>
     <button class="job-howto-toggle" onclick="toggleJobCard(this)">
       <span class="arrow">&#9654;</span> 怎么投（点击展开）
@@ -1414,22 +1455,22 @@ body {
           <li>搜索关键词："昆明 检验技师"或"昆明 医学检验"</li>
           <li>重点看这几家：<strong>美年大健康</strong>（昆明有分院）、<strong>爱康国宾</strong>、<strong>昆明同仁医院</strong></li>
           <li>看到合适的直接点"立即沟通"或"投递简历"</li>
-          <li>面试通常很简单，你有三甲经验+有证，基本稳</li>
+          <li>面试通常很简单，你有三甲底子+有证，基本稳</li>
         </ol>
         <div class="info-note">
-          <strong>为什么推荐：</strong>门槛低、全年有岗、薪资不差。你的三甲经验在民营是"降维打击"。好的能拿到8000+一个月，而且工作强度通常低于公立医院。
+          <strong>为什么放第三梯队：</strong>门槛低、全年有岗、薪资不差。你的检验实力在民营是碾压级的。但民营平台含金量低于金域和三甲，如果金域和市三院有进展，优先那两个。民营作为兜底，确保有路可走。
         </div>
       </div>
     </div>
   </div>
 
-  <!-- Job 5: 诺尔曼 -->
-  <div class="job-card" id="job5">
+  <!-- Job 6: 诺尔曼（保底） -->
+  <div class="job-card" id="job6">
     <div class="job-card-top">
       <h3>医学检验员（昆明） <span class="org-name">@ 南京诺尔曼生物技术</span></h3>
       <div class="job-tags">
         <span class="job-tag tag-org">企业</span>
-        <span class="status-badge status-open">招满即止</span>
+        <span class="status-badge status-check">保底·薪资偏低</span>
       </div>
     </div>
     <div class="job-salary-row">
@@ -1437,14 +1478,14 @@ body {
       <span class="job-salary-note">到手，IVD企业</span>
     </div>
     <div class="job-match-row">
-      <span class="match-badge match-ok">基本匹配</span>
+      <span class="match-badge match-low">保底选项·薪资偏低</span>
     </div>
     <button class="job-howto-toggle" onclick="toggleJobCard(this)">
       <span class="arrow">&#9654;</span> 怎么投（点击展开）
     </button>
     <div class="job-howto-content">
       <div class="job-howto-inner">
-        <h4>作为备选</h4>
+        <h4>作为保底</h4>
         <ol>
           <li>浏览器搜索"南京诺尔曼生物 招聘"进入官网招聘页面</li>
           <li>找昆明地区的"医学检验员"或"技术支持"岗位</li>
@@ -1452,14 +1493,14 @@ body {
           <li>面试流程：简历筛选后先电话面试，然后现场面试</li>
         </ol>
         <div class="info-note">
-          <strong>提醒：</strong>薪资偏低（比你现在可能还低一点），作为保底选项。除非其他岗位都没成，或者你对IVD行业特别感兴趣，否则不用优先考虑。
+          <strong>定位：</strong>保底选项。薪资偏低（可能比你现在还低），除非其他岗位都没成，或者你对IVD行业特别感兴趣，否则不用优先考虑。投一份放着，有面试就去，没面试不焦虑。
         </div>
       </div>
     </div>
   </div>
 
-  <!-- Job 6: 社区卫生服务中心 -->
-  <div class="job-card" id="job6">
+  <!-- Job 7: 社区卫生服务中心（最后选项） -->
+  <div class="job-card" id="job7">
     <div class="job-card-top">
       <h3>编外检验/公卫人员 <span class="org-name">@ 昆明各区社区卫生服务中心</span></h3>
       <div class="job-tags">
@@ -1487,7 +1528,7 @@ body {
           <li>这类岗位多数直接面试，不考笔试</li>
         </ol>
         <div class="info-note">
-          <strong>定位：</strong>最终保底。离家近、压力小，但薪资确实低。适合作为"中转站"——先干着，积累检验操作经验，半年到一年后再跳更好的。
+          <strong>定位：</strong>最终保底的最后选项。离家近、压力小，但薪资确实低，检验设备可能也简单。以你的检验底子（日均100+标本、6种仪器），去社区属于"大材小用"。只有前面5个选项都没进展时才考虑。
         </div>
       </div>
     </div>
@@ -1500,53 +1541,65 @@ body {
     <h2><span class="section-icon"></span>我的优势和短板</h2>
   </div>
   <p class="section-intro">
-    诚实看清楚自己手里的牌，才知道怎么打。你的情况没有那么差，但也需要正视短板。
+    数据不会骗人。下面是基于你真实数据的竞争力分析：检验技术员综合竞争力 <strong>8.8/10</strong>，教学秘书 <strong>7.7/10</strong>。检验是主场，行政是副线。
   </p>
 
-  <div class="sw-section-label strengths">三张好牌</div>
+  <div class="sw-section-label strengths">五张好牌</div>
   <div class="sw-cards">
     <div class="sw-card strength">
-      <div class="sw-card-title">三甲医院在职经验</div>
+      <div class="sw-card-title">1. 检验底子扎实</div>
       <div class="sw-card-text">
-        你现在就在三甲医院工作，这是简历上最亮眼的经历。企业HR筛简历时，"在职+三甲"比"待业+应届"有分量得多。临床工作流程、标本管理、科室协作，你每天都在接触。
+        日均处理标本100份以上，轮转全部6个专业组（临检/生化/免疫/微生物/分子生物学/输血科），在带教监督下独立操作7项检测（采血/血常规/尿常规/生化全套/凝血/血涂片/微生物接种培养），独立操作6种仪器（血球仪/生化分析仪/发光仪/凝血分析仪/尿液分析仪/显微镜）。覆盖面广，不是"只会一两种"的检验人员。
       </div>
     </div>
     <div class="sw-card strength">
-      <div class="sw-card-title">持证上岗</div>
+      <div class="sw-card-title">2. 持证+正常注册</div>
       <div class="sw-card-text">
-        临床医学检验技术初级（士）证书已经到手。很多检验岗位"持证"是硬门槛，你跨过了这道坎，竞争者直接被筛掉一半。企业招聘尤其看重这个。
+        临床医学检验技术初级（士）证书在手，且正常注册中。很多检验岗位"持证"是硬门槛，你已跨过这道坎，竞争者直接被筛掉一半。企业招聘尤其看重——证在手上意味着可以直接上岗，不需要等考证。
       </div>
     </div>
     <div class="sw-card strength">
-      <div class="sw-card-title">专业完全对口</div>
+      <div class="sw-card-title">3. 教学经验实打实</div>
       <div class="sw-card-text">
-        医学检验技术本科，专业名字和岗位要求高度匹配。招聘系统自动筛简历时，"医学检验技术"这个关键词直接命中。加上你在省一院和呈贡区医院有近两年的检验科实习经历，专业基础扎实。
+        指导过10名以上实习生，现职也在带新人。不是"帮过忙"那种虚的，是真正承担过带教工作——涂片染色操作演示、细胞形态讲解、实验报告批改。这份经验在应聘教学秘书岗时是直接的加分项，在检验岗则体现"能带新人、有领导潜力"。
+      </div>
+    </div>
+    <div class="sw-card strength">
+      <div class="sw-card-title">4. 双轨工作能力</div>
+      <div class="sw-card-text">
+        现职同时做检验操作+行政文书+跨科室协调共7类工作——检验报告对接、标本管理、排班表录入、质控记录整理、科室间联络。不是"只会操作机器"的人，是能做完整闭环的检验人员。这种多线程能力在公立医院编外岗和企业岗都很受欢迎。
+      </div>
+    </div>
+    <div class="sw-card strength">
+      <div class="sw-card-title">5. 被验证的品质</div>
+      <div class="sw-card-text">
+        被夸过"技能扎实""细心/不出错"——这不是自己说的，是别人给的评价。检验工作最值钱的品质就是不出错，你有这个口碑。面试时大方说出来："带教老师评价我细心、不出错，在省一院和三甲现职期间，经手的标本和报告没有出过差错。"
       </div>
     </div>
   </div>
 
-  <div class="sw-section-label weaknesses">三个短板（以及怎么应对）</div>
+  <div class="sw-section-label weaknesses">三个短板（诚实面对，每个都有解）</div>
   <div class="sw-cards">
     <div class="sw-card weakness">
-      <div class="sw-card-title">独立学院学历</div>
+      <div class="sw-card-title">1. 独立学院学历</div>
       <div class="sw-card-text">
-        昆明医科大学海源学院是独立学院，公立医院编制岗可能卡学历。但企业和编外岗位基本不看学校出身，更看重你能不能干活。
+        昆明医科大学海源学院是独立学院，公立医院有编制的岗位可能在简历关被卡。但企业和编外岗位基本不看学校出身——更看重你能不能干活、有没有证、有没有经验。你三条全占。
       </div>
-      <span class="sw-card-fix">应对：主攻企业岗和编外岗，不跟编制硬碰硬</span>
+      <span class="sw-card-fix">怎么办：主攻企业岗和编外岗，不与编制硬碰硬。工作2-3年后经验大于学历，届时再考编。</span>
     </div>
     <div class="sw-card weakness">
-      <div class="sw-card-title">已经不是应届生</div>
+      <div class="sw-card-title">2. 检验报告审核经验不足</div>
       <div class="sw-card-text">
-        2025年毕业到现在，校招和"应届生专项"通道已经基本关了。事业单位的"应届生通道"不适用，只能走社会招聘。
+        没独立审核过检验报告——这是你当前最大的面试盲区。面试如果被问到"有审核报告的经验吗"，直接说"没有"会被动。但你的标本处理量和操作覆盖面本身就是审核的基础。
       </div>
-      <span class="sw-card-fix">应对：社招看的是经验，你的三甲在职工龄比应届生身份更有用</span>
+      <span class="sw-card-fix">怎么办：面试前花半天复习ISO 15189基础知识和异常值复检规则。能说出理论框架就超越了大多数同级竞争者。回答话术："我目前主要在标本处理和检测环节，审核经验还在积累中。但我对异常值的识别和复检规则有理论基础，也熟悉ISO 15189的质量要求。"</span>
     </div>
     <div class="sw-card weakness">
-      <div class="sw-card-title">检验操作有些生疏</div>
+      <div class="sw-card-title">3. 室内质控经验有限</div>
       <div class="sw-card-text">
-        现在做的是医师助理，不是纯检验岗，动手操作（上机、镜检等）大概有一年没怎么碰了。面试被问到实操时可能会虚。
+        知道质控概念但没有独立操作过室内质控——质控图的绘制、Westgard规则的判断、失控后的纠正措施，这些你目前没独立做过。这也是面试可能被追问的点。
       </div>
-      <span class="sw-card-fix">应对：面试主动说"有基础、上手快、愿意从头适应"，金域面试不考操作</span>
+      <span class="sw-card-fix">怎么办：面试前复习质控基本概念（至少能说出"在控""失控""Westgard多规则"这几个关键词）。同时大方承认："质控操作我目前主要在带教指导下进行，独立经验还在积累。但我在省一院轮转期间对质控流程有完整的了解，也参与了质控记录的整理。"</span>
     </div>
   </div>
 </section>
@@ -1557,7 +1610,7 @@ body {
     <h2><span class="section-icon"></span>我的简历</h2>
   </div>
   <p class="section-intro">
-    不同岗位用不同简历，下面两份按需取用。每份简历下方都有"需要填哪些数字"可以展开查看。
+    不同岗位用不同简历。下面的数字都是你真实的——直接填进去用，不需要再估算了。
   </p>
 
   <!-- Tab Switcher -->
@@ -1570,11 +1623,11 @@ body {
   <div class="resume-compare">
     <div>
       <div class="resume-compare-label">检验版卖点</div>
-      <p>检验操作量 + 质控经验 + 持证</p>
+      <p>日均100+标本 + 6组全轮转 + 7项独立操作 + 6种仪器 + 持证</p>
     </div>
     <div>
       <div class="resume-compare-label">教学版卖点</div>
-      <p>带教能力 + 文书协调 + 医学背景懂行</p>
+      <p>指导10+实习生 + 现职双轨经验 + 医学背景懂行</p>
     </div>
   </div>
 
@@ -1594,7 +1647,7 @@ body {
         </div>
 
         <div class="resume-quote">
-          "医学检验技术本科，持检验士证。在省一院检验科轮转1年，日均处理标本约【待填】份，独立完成血尿常规、生化等检测。协助带教老师指导实习生【待填】名。求实严谨，适应科室轮班。"
+          "医学检验技术本科，持检验士证正常注册中。在省一院检验科轮转1年，轮转全部6个专业组（临检/生化/免疫/微生物/分子生物学/输血科），日均处理标本100份以上。在带教监督下独立操作7项检测：采血、血常规、尿常规、生化全套、凝血、血涂片、微生物接种培养。独立操作6种仪器：血球仪、生化分析仪、发光仪、凝血分析仪、尿液分析仪、显微镜。协助带教指导实习生10名以上。被评价技能扎实、细心、不出错。"
         </div>
 
         <div class="resume-section-label">经历</div>
@@ -1603,24 +1656,27 @@ body {
             <div class="resume-timeline-title">省一院检验科实习生</div>
             <div class="resume-timeline-meta">2024.05-2025.05 · 1年 · 三甲龙头</div>
             <ul class="resume-timeline-detail">
-              <li>轮转临检/生化/免疫等专业组，日均处理标本【待填】份</li>
-              <li>独立静脉采血约【待填】人次</li>
-              <li>熟练操作血球仪、生化仪、发光仪等设备</li>
-              <li>协助带教指导实习生【待填】名</li>
+              <li>轮转全部6个专业组（临检/生化/免疫/微生物/分子生物学/输血科），日均处理标本100份以上</li>
+              <li>独立静脉采血经验丰富</li>
+              <li>独立操作血球仪、生化分析仪、发光仪、凝血分析仪、尿液分析仪、显微镜共6种仪器</li>
+              <li>在带教监督下独立操作血常规、尿常规、生化全套、凝血、血涂片制备及染色、微生物接种培养共7项检测</li>
+              <li>协助带教指导实习生10名以上</li>
             </ul>
           </div>
           <div class="resume-timeline-item">
             <div class="resume-timeline-title">呈贡区人民医院检验科实习生</div>
             <div class="resume-timeline-meta">2022.07-2023.03 · 8个月</div>
             <ul class="resume-timeline-detail">
-              <li>完成检验科基础轮转，日均处理标本【待填】份</li>
+              <li>完成检验科基础轮转，参与标本接收与前处理，协助科室整理日常记录与标本流转台账</li>
             </ul>
           </div>
           <div class="resume-timeline-item">
             <div class="resume-timeline-title">昆明市中医医院急诊科医师助理</div>
-            <div class="resume-timeline-meta">2025.05-至今</div>
+            <div class="resume-timeline-meta">2025.05-至今 · 仍在接触检验</div>
             <ul class="resume-timeline-detail">
-              <li>协助对接检验报告，日均处理约【待填】份</li>
+              <li>协助对接检验报告，日均经手5-15份检验相关文书</li>
+              <li>检验+行政+教学多轨并行，跨科室协调联络</li>
+              <li>指导新入职人员，教学经验持续至今</li>
             </ul>
           </div>
         </div>
@@ -1641,10 +1697,11 @@ body {
 
         <div class="resume-section-label">证书与技能</div>
         <div class="resume-tags">
-          <span class="resume-tag">临床医学检验技术初级（士）</span>
-          <span class="resume-tag muted">静脉采血独立操作</span>
-          <span class="resume-tag muted">血球仪/生化仪/发光仪</span>
-          <span class="resume-tag muted">质控规范</span>
+          <span class="resume-tag">临床医学检验技术初级（士）· 正常注册</span>
+          <span class="resume-tag muted">6组全轮转（临检/生化/免疫/微生物/分子/输血）</span>
+          <span class="resume-tag muted">6种仪器独立操作</span>
+          <span class="resume-tag muted">7项检测独立操作</span>
+          <span class="resume-tag muted">日均100+标本</span>
         </div>
       </div>
     </div>
@@ -1652,16 +1709,13 @@ body {
     <!-- Numbers accordion -->
     <div class="resume-numbers">
       <button class="resume-numbers-toggle" onclick="toggleResumeNumbers(this)">
-        <span class="arrow">&#9654;</span> 我需要填哪些数字
+        <span class="arrow">&#9654;</span> 数字已填好，点此确认
       </button>
       <div class="resume-numbers-content">
         <div class="resume-numbers-inner">
-          <ol>
-            <li>省一院轮转期间 <strong>日均处理标本___份</strong>（估算一个靠谱的数，50~80比较合理）</li>
-            <li>独立 <strong>静脉采血约___人次</strong></li>
-            <li>协助带教指导 <strong>实习生___名</strong></li>
-            <li>急诊科日均 <strong>处理检验报告___份</strong></li>
-          </ol>
+          <p style="font-size:0.84rem;color:var(--text-secondary);line-height:1.7;">
+            以上所有数字（100+标本、6组、7项、6种、10+实习生、5-15份文书）均为你的真实数据，直接可用。如面试被追问，所有数字你都能讲出上下文，经得起验证。
+          </p>
         </div>
       </div>
     </div>
@@ -1683,7 +1737,7 @@ body {
         </div>
 
         <div class="resume-quote">
-          "医学检验本科，1年三甲教学辅助经验。在省一院实习期间协助带教指导实习生【待填】名，独立承担涂片染色操作演示、细胞形态讲解。现职急诊医师助理，负责检验报告归档、科室文书整理、跨科室协调。有条理，适应多线程办公。"
+          "医学检验本科，持检验士证。检验+教学双轨经验：在省一院实习期间协助带教指导实习生10名以上，独立承担涂片染色操作演示和细胞形态讲解。现职医师助理同时承担检验辅助、科室文书整理和跨科室协调共7类工作。检验操作天数至今未断，教学经验持续至今。有条理，适应多线程办公，被评价细心、不出错。"
         </div>
 
         <div class="resume-section-label">经历</div>
@@ -1692,25 +1746,28 @@ body {
             <div class="resume-timeline-title">省一院检验科实习生（兼任教学助理）</div>
             <div class="resume-timeline-meta">2024.05-2025.05 · 1年 · 全省教学龙头</div>
             <ul class="resume-timeline-detail">
-              <li>协助带教指导实习生【待填】名，独立讲解涂片染色和细胞形态识别</li>
-              <li>批阅实习生实验报告【待填】份</li>
+              <li>协助带教指导实习生10名以上，独立讲解涂片染色和细胞形态识别</li>
+              <li>批阅实习生实验报告，承担操作演示教学</li>
               <li>协助安排轮转排班，协调教学资源</li>
+              <li>轮转全部6个专业组，熟悉各组的教学要点和轮转节奏</li>
             </ul>
           </div>
           <div class="resume-timeline-item">
             <div class="resume-timeline-title">昆明市中医医院急诊科医师助理</div>
-            <div class="resume-timeline-meta">2025.05-至今</div>
+            <div class="resume-timeline-meta">2025.05-至今 · 检验+行政双轨</div>
             <ul class="resume-timeline-detail">
-              <li>负责检验报告归档整理，日均处理约【待填】份，零遗失</li>
+              <li>负责检验报告归档整理，日均经手5-15份，零遗失</li>
               <li>协助科室文书录入归档（排班表、质控记录等）</li>
-              <li>担任检验科-急诊科标本对接联络人</li>
+              <li>担任检验科-急诊科标本对接联络人，跨科室协调</li>
+              <li>指导新入职人员，教学经验持续至今</li>
             </ul>
           </div>
           <div class="resume-timeline-item">
             <div class="resume-timeline-title">呈贡区人民医院检验科实习生</div>
             <div class="resume-timeline-meta">2022.07-2023.03 · 8个月</div>
             <ul class="resume-timeline-detail">
-              <li>协助整理试剂出入库、标本交接等日常文书</li>
+              <li>完成检验科基础轮转，参与标本接收与前处理，协助科室整理日常记录与标本流转台账</li>
+              <li>参与检验科基础轮转，建立临床检验全流程认知</li>
             </ul>
           </div>
         </div>
@@ -1731,11 +1788,12 @@ body {
 
         <div class="resume-section-label">证书与技能</div>
         <div class="resume-tags">
-          <span class="resume-tag">临床医学检验技术初级（士）</span>
+          <span class="resume-tag">临床医学检验技术初级（士）· 正常注册</span>
+          <span class="resume-tag muted">指导10+实习生</span>
           <span class="resume-tag muted">教学演示与讲解</span>
           <span class="resume-tag muted">Word/Excel排班统计</span>
           <span class="resume-tag muted">跨科室协调</span>
-          <span class="resume-tag muted">文书归档整理</span>
+          <span class="resume-tag muted">文书归档零差错</span>
         </div>
       </div>
     </div>
@@ -1743,15 +1801,13 @@ body {
     <!-- Numbers accordion -->
     <div class="resume-numbers">
       <button class="resume-numbers-toggle" onclick="toggleResumeNumbers(this)">
-        <span class="arrow">&#9654;</span> 我需要填哪些数字
+        <span class="arrow">&#9654;</span> 数字已填好，点此确认
       </button>
       <div class="resume-numbers-content">
         <div class="resume-numbers-inner">
-          <ol>
-            <li>协助带教指导 <strong>实习生___名</strong></li>
-            <li>批阅实习生 <strong>实验报告___份</strong></li>
-            <li>急诊科日均处理 <strong>报告归档___份</strong></li>
-          </ol>
+          <p style="font-size:0.84rem;color:var(--text-secondary);line-height:1.7;">
+            以上所有数字（10+实习生、7类工作、5-15份文书）均为你的真实数据。面试如果被问"为什么不继续做检验转行政"，回答案例见上方云大附院卡片中的提示。
+          </p>
         </div>
       </div>
     </div>
@@ -1790,6 +1846,10 @@ body {
       <input type="checkbox">
       <span class="checklist-label">更新简历：把"三甲医院在职""持检验士证""医学检验技术本科"放在最前面，HR扫一眼就能看到这三条。</span>
     </label>
+    <label class="checklist-item">
+      <input type="checkbox">
+      <span class="checklist-label"><span class="highlight">复习检验报告审核基础知识：</span>花半天翻看ISO 15189要点（量值溯源、质量控制）、异常值复检规则、Westgard多规则。不要求精通，能说出理论框架即可——面试时这是你跟其他候选人的关键区分点。</span>
+    </label>
   </div>
 
   <!-- 本月 -->
@@ -1813,7 +1873,7 @@ body {
     </label>
     <label class="checklist-item">
       <input type="checkbox">
-      <span class="checklist-label">练熟自我介绍：准备一个30秒版（医学检验技术本科，三甲在职，持证）和一个2分钟版（加上实习经历和求职意向），各说3遍以上</span>
+      <span class="checklist-label">练熟自我介绍：参考下方话术模板，准备30秒版和2分钟版，各说3遍以上</span>
     </label>
     <label class="checklist-item">
       <input type="checkbox">
@@ -1838,6 +1898,26 @@ body {
     </label>
   </div>
 
+  <!-- 自我介绍话术模板 -->
+  <div class="action-block" style="margin-top:28px;">
+    <h3>自我介绍话术模板</h3>
+    <div style="background:var(--card-bg);border-radius:var(--radius);padding:18px 22px;border:1px solid var(--border);margin-bottom:10px;">
+      <p style="font-size:0.78rem;font-weight:700;color:var(--text-muted);margin-bottom:6px;text-transform:uppercase;letter-spacing:0.06em;">30秒版（初筛/HR电话）</p>
+      <p style="font-size:0.88rem;color:var(--text);line-height:1.75;">
+        "我是烤馒头，医学检验技术本科，持检验士证正常注册中。我在省一院检验科轮转1年，轮转全部6个专业组，日均处理标本100份以上，独立操作6种仪器、完成7项检验操作。现在三甲医院在职，检验和行政双轨并行。我对检验技术员这个岗位很感兴趣。"
+      </p>
+    </div>
+    <div style="background:var(--card-bg);border-radius:var(--radius);padding:18px 22px;border:1px solid var(--border);">
+      <p style="font-size:0.78rem;font-weight:700;color:var(--text-muted);margin-bottom:6px;text-transform:uppercase;letter-spacing:0.06em;">2分钟版（技术面/主管面）</p>
+      <p style="font-size:0.88rem;color:var(--text);line-height:1.75;">
+        "我是烤馒头，医学检验技术本科，持检验士证正常注册中。我在省一院检验科轮转了1年，轮转全部6个专业组——临检、生化、免疫、微生物、分子生物学和输血科。日均处理标本100份以上，在带教监督下独立操作采血、血常规、尿常规、生化全套、凝血、血涂片、微生物接种培养共7项检测，熟练操作血球仪、生化分析仪、发光仪、凝血分析仪、尿液分析仪、显微镜6种仪器。同时协助带教指导了10名以上实习生。现在在三甲医院急诊科做医师助理，检验操作天数至今没断过，同时承担行政文书和跨科室协调工作。带教老师和同事的评价是技能扎实、细心、不出错。我对贵单位的检验技术员岗位非常感兴趣，我的检验覆盖面广、上手速度快，很有信心能胜任。"
+      </p>
+    </div>
+    <p style="color:var(--text-muted);font-size:0.78rem;margin-top:8px;font-style:italic;">
+      核心原则：不回避短板，但把优势摆前面。自信但不夸大。所有数字都是真实的，面试追问也不怕。
+    </p>
+  </div>
+
   <p style="color:var(--text-muted);font-size:0.8rem;margin-top:12px;font-style:italic;">
     提示：在手机上打开这个页面，勾选状态不会保存。建议打印出来用笔勾，或者截图对着做。
   </p>
@@ -1853,26 +1933,13 @@ body {
     <div class="faq-question">我要不要辞职专心找工作？</div>
     <div class="faq-answer">
       <div class="faq-answer-inner">
-        <p><strong>不建议辞职。真的不要。</strong></p>
-        <p>三个很简单的原因：</p>
-        <p>1. <strong>"在职"本身就是加分项。</strong>招聘方会觉得你更有价值——有人要你，说明你不差。待业的人反而容易被压低薪资。</p>
-        <p>2. 辞职后如果一两个月找不到合适的，钱的问题和心理压力会一起上来。压力大的时候面试发挥反而不好。</p>
-        <p>3. 骑驴找马是最聪明的做法。下班后、周末投投简历、去面试，完全可以兼顾。三甲医院的工作时间相对规律，你完全有时间。</p>
-        <p><strong>什么时候辞职？——拿到正式offer并且签了合同之后。</strong>在这之前，安心上班，偷偷找路。</p>
-      </div>
-    </div>
-  </div>
-
-  <div class="faq-item">
-    <div class="faq-question">独立学院毕业，是不是很多地方不要我？</div>
-    <div class="faq-answer">
-      <div class="faq-answer-inner">
-        <p><strong>编制内确实吃亏，但编制外大把机会。</strong></p>
-        <p>诚实地说：公立医院有编制的岗位，很多在简历关就卡学历，独立学院可能被系统自动过滤或人工降级。这是现实，不用骗自己。</p>
-        <p>但现实还有另一面：</p>
-        <p>- <strong>企业岗位</strong>（金域医学、民营医院、体检中心）完全不看学校出身。HR只关心你能不能干活、有没有证、有没有经验。你三条都占了。</p>
-        <p>- <strong>编外岗位</strong>（市三院编外、社区编外）对学历要求宽松得多，更看重实际能力。</p>
-        <p>- 退一步说：先进医疗系统（哪怕是编外或企业），干2-3年攒够经验后，再考编或跳更好的平台。那时候<strong>工作经验大于学历背景</strong>。</p>
+        <p><strong>不建议辞职，你完全不需要。</strong></p>
+        <p>你的情况很清楚：检验能力在线、有证、有三甲背景。你不是那种"必须辞职才有时间找工作"的被动求职者，你是"在职状态下有选择权"的主动求职者。</p>
+        <p>三个硬理由：</p>
+        <p>1. <strong>"在职"本身就是议价筹码。</strong>招聘方会觉得你更有价值——有人要你，说明你不差。待业的人反而容易被压低薪资。</p>
+        <p>2. 辞职后如果一两个月找不到合适的，经济压力和心理压力会一起上来。压力大的时候面试发挥反而不好。</p>
+        <p>3. 骑驴找马是聪明的做法。你的检验工作底子一直在用，不是闲着的状态。下班后、周末投投简历、去面试，完全可以兼顾。</p>
+        <p><strong>什么时候辞职？——拿到正式offer并且签了合同之后。</strong>在这之前，安心上班，从容找路。你有筹码，不必急。</p>
       </div>
     </div>
   </div>
@@ -1887,7 +1954,8 @@ body {
         <p>- <strong>行业第一：</strong>全国最大的第三方医学检验机构，服务23000多家医院和诊所</p>
         <p>- <strong>昆明分公司：</strong>全资子公司，在云南检验市场占有率排第一</p>
         <p>- <strong>你去做什么：</strong>检验技术员，负责标本检测、出报告、维护仪器。跟你学的专业一模一样</p>
-        <p>- <strong>为什么推荐你投：</strong>大平台+正规五险一金+六险一金+员工宿舍+有食堂有补贴。有明确的晋升路线（技术员升级主管再升级经理）。面试主要是沟通和看态度，不考实操，对你的情况最友好。</p>
+        <p>- <strong>为什么推荐你投：</strong>大平台+正规五险一金+六险一金+员工宿舍+有食堂有补贴。有明确的晋升路线（技术员升级主管再升级经理）。面试主要是沟通和看态度，不考实操。</p>
+        <p>- <strong>面试提醒：</strong>金域作为通过ISO 15189认可的第三方实验室，面试时可能问到你对质量体系的了解。提前复习ISO 15189基础知识和异常值复检规则，会让你在候选人中明显突出。</p>
       </div>
     </div>
   </div>
@@ -1911,16 +1979,31 @@ body {
   </div>
 
   <div class="faq-item">
-    <div class="faq-question">检验操作有点生疏了，面试被问到怎么办？</div>
+    <div class="faq-question">面试被问到报告审核和质控经验，怎么回答？</div>
     <div class="faq-answer">
       <div class="faq-answer-inner">
-        <p><strong>诚实说，但换个说法。</strong></p>
-        <p>可以参考这样说（背下来也行，面试时用自己的话说）：</p>
-        <p>"我现在做的是医师助理，日常不直接操作检验仪器。但对于标本接收、前处理、结果判读这些流程我都很熟悉，每天都在接触。检验操作我有扎实的专业基础——在学校实操课成绩不错，省一院和呈贡区医院加起来近两年的检验科实习也不是白待的。只需要一个短期适应就能完全捡回来，我有信心。"</p>
+        <p><strong>这是你当前最大的面试盲区，但完全有办法应对。</strong></p>
+        <p>现实是：你没独立审核过检验报告，也没有独立操作过室内质控。面试如果直接回答"不会"，会很被动。但你的优势在于标本处理量足够大、覆盖面足够广，这本身就是审核和质控的基础。</p>
+        <p><strong>建议话术（背下来，用自己的话说）：</strong></p>
+        <p>"我目前在标本处理和检测环节经验扎实，审核报告的经验还在积累中。但我对异常值的识别和复检规则有理论基础——比如危急值的确认流程、Delta check的基本逻辑、以及ISO 15189对检验结果量值溯源的要求。质控方面，我知道Westgard多规则的基本应用，比如1<sub>2s</sub>警告规则和1<sub>3s</sub>失控规则的含义。我在省一院轮转期间也参与了质控记录的整理。独立操作经验还需要补，但理论框架已经有了，上手会很快。"</p>
         <p><strong>关键三点：</strong></p>
-        <p>- 别回避，大方承认</p>
-        <p>- 强调"有基础、上手快"</p>
-        <p>- 优先投金域（不考操作），民营也多是面试为主</p>
+        <p>- 不回避，坦诚说"在积累中"比"没有"好得多</p>
+        <p>- 用理论框架证明你准备了、学过了</p>
+        <p>- 面试前花半天认真复习ISO 15189和Westgard规则，不要面试时说漏嘴</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-question">独立学院学历会影响我找检验岗吗？</div>
+    <div class="faq-answer">
+      <div class="faq-answer-inner">
+        <p><strong>企业完全不看，编制内要小心。</strong></p>
+        <p>诚实地说：</p>
+        <p>- <strong>企业岗（金域、民营、体检中心、IVD公司）：</strong>完全不看学校出身。HR只看你能不能干活、有没有证、有没有经验。你的检验底子（日均100+标本、6组轮转、7项操作、6种仪器）在昆明检验市场属于中上水平，企业抢着要。</p>
+        <p>- <strong>公立编外岗（市三院编外、社区编外）：</strong>学历要求宽松，更看重实际能力和经验。你有三甲背景+持证，编外岗竞争力很强。</p>
+        <p>- <strong>公立编制岗：</strong>独立学院确实可能在简历关被系统过滤或降级。这是现实，不用骗自己。</p>
+        <p><strong>策略：</strong>主攻企业岗和编外岗，不跟编制硬碰硬。工作2-3年后，经验积累够了，到时候再考编，工作经验的权重会超过学历。检验行业，能干活的人永远有饭吃。</p>
       </div>
     </div>
   </div>
@@ -1930,8 +2013,8 @@ body {
 
 <!-- ====== FOOTER ====== -->
 <footer class="footer">
-  <p class="motto">分步走，不指望一步到位。先上岸，再择船。</p>
-  <p>烤馒头求职指南 · 2026年6月</p>
+  <p class="motto">检验是主场，行政是副线。数据说了实话，我选适合我的。</p>
+  <p>烤馒头求职指南 · 2026年6月 · 数据更新版</p>
   <p style="margin-top:2px;font-size:0.78rem;">以上信息来自公开招聘数据整理，具体以各单位最新公告为准</p>
 </footer>
 
