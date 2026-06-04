@@ -191,8 +191,71 @@ body {
 }
 
 .nav a:hover, .nav a.active {
-  background: var(--primary);
-  color: #fff;
+	background: var(--primary);
+	color: #fff;
+}
+
+.nav a.shanghai-nav {
+	color: #1e5f8a;
+	font-weight: 600;
+}
+
+.nav a.shanghai-nav:hover, .nav a.shanghai-nav.active {
+	background: #1e5f8a;
+	color: #fff;
+}
+
+/* ---- Shanghai accent ---- */
+.tag-shanghai {
+	background: #dceefa !important;
+	color: #1e5f8a !important;
+	font-weight: 700 !important;
+}
+
+.shanghai-note {
+	background: linear-gradient(135deg, #eaf2f8 0%, #f0f7fb 100%);
+	border: 2px solid #2980b9;
+	border-radius: var(--radius-lg);
+	padding: 20px 24px;
+	margin-bottom: 24px;
+	display: flex;
+	align-items: flex-start;
+	gap: 14px;
+}
+
+.shanghai-note-icon {
+	font-size: 1.6rem;
+	flex-shrink: 0;
+	line-height: 1;
+}
+
+.shanghai-note-body h3 {
+	font-size: 1rem;
+	font-weight: 700;
+	color: #1e5f8a;
+	margin-bottom: 6px;
+}
+
+.shanghai-note-body p {
+	font-size: 0.85rem;
+	color: var(--text-secondary);
+	line-height: 1.7;
+}
+
+.shanghai-note-body .hl-good {
+	background: #d5f0e2;
+	color: #1a6b5a;
+	padding: 2px 8px;
+	border-radius: 4px;
+	font-weight: 600;
+}
+
+.shanghai-note-body .hl-warn {
+	background: #fef2e0;
+	color: #c4943d;
+	padding: 2px 8px;
+	border-radius: 4px;
+	font-weight: 600;
 }
 
 /* ---- Container ---- */
@@ -1239,10 +1302,10 @@ body {
 <!-- ====== HEADER ====== -->
 <header class="header">
   <div class="header-inner">
-    <div class="header-badge">2026年6月 · 数据更新版</div>
+    <div class="header-badge">2026年6月 · 昆明 + 上海</div>
     <h1>烤馒头求职指南</h1>
     <p class="subtitle">医学检验技术 · 持证上岗 · 三甲医院在职</p>
-    <p class="tagline">数据澄清了方向。检验是主场，行政是副线。我有筹码，选适合我的。</p>
+    <p class="tagline">昆明是主场，上海是机会。检验是根基，迈瑞是最优解。</p>
 
     <!-- Urgent Alert -->
     <div class="urgent-alert">
@@ -1261,7 +1324,8 @@ body {
 
 <!-- ====== NAV ====== -->
 <nav class="nav" id="nav">
-  <a href="#jobs">我能去哪</a>
+  <a href="#jobs">昆明岗位</a>
+  <a href="#shanghai" class="shanghai-nav">上海岗位</a>
   <a href="#strengths">我的优势</a>
   <a href="#resume">我的简历</a>
   <a href="#actions">现在做什么</a>
@@ -1273,10 +1337,10 @@ body {
 <!-- ====== SECTION 1: 能投的岗位 ====== -->
 <section class="section" id="jobs">
   <div class="section-header">
-    <h2><span class="section-icon"></span>现在可以投的岗位</h2>
+    <h2><span class="section-icon">&#x1F4CD;</span>昆明 · 可以投的岗位</h2>
   </div>
   <p class="section-intro">
-    下面是6个确认在招的岗位，按推荐优先级排列。你的检验底子很扎实——日均100+标本、6组全轮转、6种仪器独立操作。这份实力在昆明检验市场很有竞争力。
+    下面是7个确认在招的昆明岗位，按推荐优先级排列。你的检验底子很扎实——日均100+标本、6组全轮转、6种仪器独立操作。这份实力在昆明检验市场很有竞争力。也想看上海？<a href="#shanghai" style="color:#1e5f8a;font-weight:600;">往下滑&#x27A1;</a></p>
   </p>
 
   <!-- Job 1: 金域医学（最匹配） -->
@@ -1532,6 +1596,264 @@ body {
         </div>
       </div>
     </div>
+  </div>
+</section>
+
+<!-- ====== SHANGHAI SECTION ====== -->
+<section class="section" id="shanghai">
+  <div class="section-header">
+    <h2><span class="section-icon">&#x1F4CD;</span>上海 · 高度匹配岗位</h2>
+  </div>
+  <p class="section-intro">
+    2026年6月Tavily实时搜索——发现19个可投岗位。以下是精选的6个最佳匹配，全部<strong>本科可报</strong>。
+    企业的薪资是昆明的2-3倍。如果你愿意离开昆明，上海是值得考虑的方向。
+  </p>
+
+  <!-- Key Caveats -->
+  <div class="shanghai-note">
+    <div class="shanghai-note-icon">&#x26A0;</div>
+    <div class="shanghai-note-body">
+      <h3>上海求职须知</h3>
+      <p>
+        <span class="hl-good">企业不卡学历、不要居住证</span>——迈瑞、徕博科、金域、迪安这些都是你的主战场。<br>
+        <span class="hl-warn">公立医院事业编要居住证满1年</span>——没有居住证的话，新华/瑞金大概率会被卡。但可以先投，不投一定没机会。<br>
+        <span class="hl-good">上海房租+生活费约5000-8000/月</span>——迈瑞17万起完全可以覆盖且有结余，低薪岗位则需谨慎计算净收入。
+      </p>
+    </div>
+  </div>
+
+  <!-- Job S1: 迈瑞医疗（最优选） -->
+  <div class="job-card" id="sh-job1">
+    <div class="job-card-top">
+      <h3>临床应用专员（上海） <span class="org-name">@ 迈瑞医疗 · IVD龙头</span></h3>
+      <div class="job-tags">
+        <span class="job-tag tag-shanghai">上海有岗</span>
+        <span class="status-badge status-open">最优选</span>
+      </div>
+    </div>
+    <div class="job-salary-row">
+      <span class="job-salary">17万起/年</span>
+      <span class="job-salary-note">本科起薪，2026春招进行中</span>
+    </div>
+    <div class="job-match-row">
+      <span class="match-badge match-good">&#x2B50;&#x2B50;&#x2B50;&#x2B50;&#x2B50; 最佳选择——不卡学历、不卡居住证、薪资最高</span>
+    </div>
+    <button class="job-howto-toggle" onclick="toggleJobCard(this)">
+      <span class="arrow">&#9654;</span> 怎么投 + 为什么推荐（点击展开）
+    </button>
+    <div class="job-howto-content">
+      <div class="job-howto-inner">
+        <h4>为什么这是最优选择</h4>
+        <ol>
+          <li>薪资是昆明同类岗位的<strong>2-3倍</strong>，17万起在全国检验应届/初级岗中都算高</li>
+          <li><strong>企业不看学校出身</strong>——独立学院不影响录用</li>
+          <li><strong>不需要上海居住证</strong>——企业直接签劳动合同</li>
+          <li>你的6种仪器独立操作经验+沟通能力是这个岗位的黄金组合</li>
+          <li>工作内容是从检验台走向临床应用支持——用专业知识帮客户用好仪器，成长空间比纯检验岗大</li>
+        </ol>
+        <div class="info-note">
+          <strong>怎么投：</strong>微信搜索公众号"迈瑞医疗招聘"→校园招聘（春招通道仍开放需确认）→搜"临床应用专员"→选上海。如校招通道关闭，尝试在猎聘/前程无忧搜索"迈瑞医疗 临床应用专员 上海"找社招通道。
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Job S2: 新华医院 -->
+  <div class="job-card" id="sh-job2">
+    <div class="job-card-top">
+      <h3>检验科医技 <span class="org-name">@ 新华医院 · 三甲</span></h3>
+      <div class="job-tags">
+        <span class="job-tag tag-shanghai">公立三甲</span>
+        <span class="status-badge status-open">招44人医技</span>
+      </div>
+    </div>
+    <div class="job-salary-row">
+      <span class="job-salary">按三甲标准</span>
+      <span class="job-salary-note">事业编制/备案制，2026年新职工招聘</span>
+    </div>
+    <div class="job-match-row">
+      <span class="match-badge match-good">&#x2B50;&#x2B50;&#x2B50;&#x2B50;&#x2B50; 公立最优选——首批国家临床重点专科检验科</span>
+    </div>
+    <button class="job-howto-toggle" onclick="toggleJobCard(this)">
+      <span class="arrow">&#9654;</span> 投递信息（点击展开）
+    </button>
+    <div class="job-howto-content">
+      <div class="job-howto-inner">
+        <ol>
+          <li>2026年新职工招聘，医技人员招<strong>44人</strong>（含医学检验科），全日制本科及以上</li>
+          <li>需走医院招聘系统报名，关注新华医院官网"人才招聘"栏目</li>
+          <li>外省市社会人员须持<strong>上海市居住证一年以上</strong>（应届除外）</li>
+          <li>工作地点：杨浦/奉贤两院区，奉贤可享受免费职工宿舍+购房补贴</li>
+        </ol>
+        <div class="info-note">
+          <strong>注意：</strong>新华检验科是首批国家临床重点专科，竞争激烈。独立学院在简历筛选中可能不占优，但仍值得投——招44人覆盖面大，研究生优先不等于本科不行。
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Job S3: 瑞金医院 -->
+  <div class="job-card" id="sh-job3">
+    <div class="job-card-top">
+      <h3>技术员B-医学检验科 <span class="org-name">@ 瑞金医院 · 顶级三甲</span></h3>
+      <div class="job-tags">
+        <span class="job-tag tag-shanghai">本科可报</span>
+        <span class="status-badge status-open">2026年5月招聘</span>
+      </div>
+    </div>
+    <div class="job-salary-row">
+      <span class="job-salary">按三甲标准</span>
+      <span class="job-salary-note">顶级三甲平台，检验科全国领先</span>
+    </div>
+    <div class="job-match-row">
+      <span class="match-badge match-good">&#x2B50;&#x2B50;&#x2B50;&#x2B50;&#x2B50; 平台价值最高——顶级三甲罕见的本科岗</span>
+    </div>
+    <button class="job-howto-toggle" onclick="toggleJobCard(this)">
+      <span class="arrow">&#9654;</span> 投递信息（点击展开）
+    </button>
+    <div class="job-howto-content">
+      <div class="job-howto-inner">
+        <ol>
+          <li>来源：瑞金医院2026年5月招聘启事</li>
+          <li>检验科分<strong>技术员A（硕士）</strong>和<strong>技术员B（本科）</strong>——技术员B是顶级三甲中难得的本科机会</li>
+          <li>关注瑞金医院官网人才招聘栏目，外省市需居住证</li>
+          <li>瑞金检验科是全国标杆，这段经历写进简历是终生资产</li>
+        </ol>
+        <div class="info-note">
+          <strong>现实提醒：</strong>瑞金是上海最难进的三甲之一，独立学院+无关系的录取概率不高。但这是一张彩票——投了不一定中，不投一定不中。
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Job S4: 宝山区中西医结合医院 -->
+  <div class="job-card" id="sh-job4">
+    <div class="job-card-top">
+      <h3>检验科人员 <span class="org-name">@ 宝山区中西医结合医院 · 三甲</span></h3>
+      <div class="job-tags">
+        <span class="job-tag tag-shanghai">招3人</span>
+        <span class="status-badge status-open">本科可报</span>
+      </div>
+    </div>
+    <div class="job-salary-row">
+      <span class="job-salary">按公立标准</span>
+      <span class="job-salary-note">三甲医院，检验科招3人</span>
+    </div>
+    <div class="job-match-row">
+      <span class="match-badge match-good">&#x2B50;&#x2B50;&#x2B50;&#x2B50;&#x2B50; 新发现——招3人+本科可报</span>
+    </div>
+    <button class="job-howto-toggle" onclick="toggleJobCard(this)">
+      <span class="arrow">&#9654;</span> 投递信息（点击展开）
+    </button>
+    <div class="job-howto-content">
+      <div class="job-howto-inner">
+        <ol>
+          <li>来源：2026年度招聘启事（最新搜索发现）</li>
+          <li>检验科招<strong>3人</strong>，名额比一般科室多，机会更大</li>
+          <li>三甲中西医结合医院，竞争相对瑞金/新华小</li>
+          <li>关注医院官网招聘公告，外省市需确认居住证要求</li>
+        </ol>
+        <div class="info-note">
+          <strong>推荐理由：</strong>招3人在检验招聘中算多的，加上不是最热门的三甲（不像瑞金/新华那么多人盯着），实际竞争可能比想象中小。
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Job S5: 徕博科 -->
+  <div class="job-card" id="sh-job5">
+    <div class="job-card-top">
+      <h3>Medical Technologist I <span class="org-name">@ 徕博科 Labcorp · 外企</span></h3>
+      <div class="job-tags">
+        <span class="job-tag tag-shanghai">外企</span>
+        <span class="status-badge status-open">10-15k·13薪</span>
+      </div>
+    </div>
+    <div class="job-salary-row">
+      <span class="job-salary">10-15k·13薪</span>
+      <span class="job-salary-note">外资CRO，张江，1-3年经验</span>
+    </div>
+    <div class="job-match-row">
+      <span class="match-badge match-good">&#x2B50;&#x2B50;&#x2B50;&#x2B50; 外企福利好——全球最大CRO，不卡学历</span>
+    </div>
+    <button class="job-howto-toggle" onclick="toggleJobCard(this)">
+      <span class="arrow">&#9654;</span> 投递信息（点击展开）
+    </button>
+    <div class="job-howto-content">
+      <div class="job-howto-inner">
+        <ol>
+          <li>徕博科是全球最大的CRO/医学实验室服务商，世界500强级别</li>
+          <li>临床检验-生化方向，1-3年经验要求（你近2年实习+1年工作基本满足）</li>
+          <li>不卡学历、不要居住证，13薪+外企福利</li>
+          <li>通过LinkedIn或猎聘搜索"Labcorp Shanghai Medical Technologist"投递</li>
+        </ol>
+        <div class="info-note">
+          <strong>外企优势：</strong>工作环境规范、培训体系完善、英语环境（可积累语言能力）。检验操作断档1年是你需要准备的面试问题——回答案例："现职虽然偏临床助理，但每天对接检验报告，对检验结果的分析和临床意义的理解反而比纯操作岗更深。"
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Job S6: 上海临床研究中心 -->
+  <div class="job-card" id="sh-job6">
+    <div class="job-card-top">
+      <h3>检验科技师 <span class="org-name">@ 上海临床研究中心 · 上科大附属</span></h3>
+      <div class="job-tags">
+        <span class="job-tag tag-shanghai">新建平台</span>
+        <span class="status-badge status-open">招2人</span>
+      </div>
+    </div>
+    <div class="job-salary-row">
+      <span class="job-salary">有竞争力</span>
+      <span class="job-salary-note">上科大平台，新建实验室</span>
+    </div>
+    <div class="job-match-row">
+      <span class="match-badge match-good">&#x2B50;&#x2B50;&#x2B50;&#x2B50;&#x2B50; 新建平台机会多——设备新、晋升快</span>
+    </div>
+    <button class="job-howto-toggle" onclick="toggleJobCard(this)">
+      <span class="arrow">&#9654;</span> 投递信息（点击展开）
+    </button>
+    <div class="job-howto-content">
+      <div class="job-howto-inner">
+        <ol>
+          <li>上海科技大学附属，张江科学城，新建检验科</li>
+          <li>有质谱、流式细胞术、二代测序经验者优先（你在省一院轮转期间如有接触一定要写进简历）</li>
+          <li>通过上海临床研究中心官网"应聘岗位"提交材料</li>
+          <li>事业单位属性，可能需居住证（需确认）</li>
+        </ol>
+        <div class="info-note">
+          <strong>新建平台优势：</strong>新建检验科意味着设备最新、机会最多。早期加入，晋升空间大。上科大是双一流高校，平台含金量高。
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Shanghai Summary -->
+  <div style="background:var(--card-bg);border-radius:var(--radius-lg);padding:24px 26px;box-shadow:var(--shadow-sm);border:1px solid var(--border);margin-top:20px;">
+    <h3 style="font-size:1rem;font-weight:700;color:#1e5f8a;margin-bottom:12px;">&#x1F4CA; 上海 vs 昆明——真实对比</h3>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;font-size:0.85rem;color:var(--text-secondary);line-height:1.7;">
+      <div>
+        <strong style="color:var(--primary);">昆明的优势</strong>
+        <ul style="padding-left:18px;margin-top:4px;">
+          <li>生活成本低，4-8k基本全存</li>
+          <li>无居住证门槛</li>
+          <li>家人近，生活圈熟悉</li>
+          <li>民营/社区岗位竞争小</li>
+        </ul>
+      </div>
+      <div>
+        <strong style="color:#1e5f8a;">上海的优势</strong>
+        <ul style="padding-left:18px;margin-top:4px;">
+          <li>迈瑞17万起，是昆明同类3倍</li>
+          <li>顶级三甲（瑞金/新华）公开招聘</li>
+          <li>企业线不卡学历、不卡居住证</li>
+          <li>跳槽空间大，1-2年后可晋升</li>
+        </ul>
+      </div>
+    </div>
+    <p style="margin-top:14px;font-size:0.83rem;color:var(--text-muted);line-height:1.75;">
+      <strong>结论：</strong>如果愿意去上海，<strong style="color:#1e5f8a;">迈瑞临床应用专员（17万起）是最现实的路线</strong>——薪资高、不卡学历和居住证。其次是徕博科（外企10-15k）。公立线（新华/瑞金/宝山）是冲刺目标。如果留在昆明，金域检验技术员（7-12万/年）是最优解。两条线可以<strong>同时投</strong>，不冲突。
+    </p>
   </div>
 </section>
 
@@ -2013,8 +2335,8 @@ body {
 
 <!-- ====== FOOTER ====== -->
 <footer class="footer">
-  <p class="motto">检验是主场，行政是副线。数据说了实话，我选适合我的。</p>
-  <p>烤馒头求职指南 · 2026年6月 · 数据更新版</p>
+  <p class="motto">昆明是主场，上海是机会。检验是根基，迈瑞是最优解。</p>
+  <p>烤馒头求职指南 · 2026年6月 · 昆明+上海双城版</p>
   <p style="margin-top:2px;font-size:0.78rem;">以上信息来自公开招聘数据整理，具体以各单位最新公告为准</p>
 </footer>
 
